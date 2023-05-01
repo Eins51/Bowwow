@@ -11,7 +11,7 @@
  Target Server Version : 100422 (10.4.22-MariaDB)
  File Encoding         : 65001
 
- Date: 01/05/2023 16:27:37
+ Date: 01/05/2023 22:12:21
 */
 
 SET NAMES utf8mb4;
@@ -34,11 +34,42 @@ CREATE TABLE `address`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_id`(`user_id` ASC) USING BTREE,
   CONSTRAINT `address_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of address
 -- ----------------------------
+INSERT INTO `address` VALUES (1, 2, 0, 'United States', 'California', 'Los Angeles', 'Beverly Hills', '1234 Rodeo Dr', '90210');
+INSERT INTO `address` VALUES (2, 3, 1, 'United States', 'New York', 'New York City', 'Midtown', '567 5th Ave', '10017');
+INSERT INTO `address` VALUES (3, 4, 0, 'United States', 'Texas', 'Houston', 'Uptown', '8912 Westheimer Rd', '77063');
+INSERT INTO `address` VALUES (4, 5, 1, 'United States', 'Florida', 'Miami', 'Downtown', '456 Biscayne Blvd', '33132');
+INSERT INTO `address` VALUES (5, 6, 0, 'United States', 'Nevada', 'Las Vegas', 'The Strip', '7899 S Las Vegas Blvd', '89123');
+INSERT INTO `address` VALUES (6, 7, 1, 'United States', 'Illinois', 'Chicago', 'Downtown', '321 N Clark St', '60654');
+INSERT INTO `address` VALUES (7, 8, 0, 'United States', 'Pennsylvania', 'Philadelphia', 'Center City', '101 S Independence Mall E', '19106');
+INSERT INTO `address` VALUES (8, 9, 1, 'United States', 'Massachusetts', 'Boston', 'Back Bay', '200 Boylston St', '02116');
+INSERT INTO `address` VALUES (9, 10, 0, 'United States', 'Georgia', 'Atlanta', 'Buckhead', '3500 Peachtree Rd', '30326');
+INSERT INTO `address` VALUES (10, 11, 1, 'United States', 'Colorado', 'Denver', 'Downtown', '100 W 14th Ave Pkwy', '80204');
+INSERT INTO `address` VALUES (11, 12, 0, 'United States', 'Washington', 'Seattle', 'Downtown', '1301 5th Ave', '98101');
+
+-- ----------------------------
+-- Table structure for admin
+-- ----------------------------
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `gender` tinyint NULL DEFAULT NULL COMMENT '0: male, 1: female, 2: others, 3: secrecy',
+  `phone` int NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `image_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'for headshots',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of admin
+-- ----------------------------
+INSERT INTO `admin` VALUES (1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 3, 123456789, 'admin@gmail.com', 'admin_avatar.png');
 
 -- ----------------------------
 -- Table structure for category
@@ -180,7 +211,7 @@ DROP TABLE IF EXISTS `pet`;
 CREATE TABLE `pet`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `gender` tinyint NULL DEFAULT NULL COMMENT '0: male, 1: female, 2: secrecy',
+  `gender` tinyint NULL DEFAULT NULL COMMENT '0: male, 1: female, 2: others, 3: secrecy',
   `breed` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `size` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `age` int NULL DEFAULT NULL,
@@ -263,12 +294,11 @@ INSERT INTO `product` VALUES (15, 'Large Dog Bed', 1, 0, 79.99, 15, 0, 'This com
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `gender` tinyint NULL DEFAULT NULL COMMENT '0: male, 1: female, 2: others, 3: secrecy',
   `phone` int NOT NULL,
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `is_admin` tinyint NOT NULL COMMENT '0: no, 1: yes',
   `is_member` tinyint NOT NULL COMMENT '0: no, 1: yes',
   `num_purchase` int NOT NULL COMMENT 'number of purchase/orders',
   `amount` decimal(10, 2) NOT NULL COMMENT 'total purchase amount',
@@ -282,17 +312,17 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 'admin', '1234', 3, 1234567890, 'admin@example.com', 1, 1, 10, 100.50, 0, '123 Main St, Anytown USA', '15:30:00', '/path/to/image.jpg');
-INSERT INTO `user` VALUES (2, 'John Doe', 'sdf1Hjks%', 0, 328593827, 'johndoe@example.com', 0, 1, 10, 899.99, 1, '123 Main St, Anytown USA', '18:15:00', 'path/to/image1.jpg');
-INSERT INTO `user` VALUES (3, 'Jane Smith', 'dgh0fT%hG', 1, 827349020, 'janesmith@example.com', 0, 1, 5, 450.00, 0, '456 Oak Ave, Anytown USA', '14:30:00', 'path/to/image2.jpg');
-INSERT INTO `user` VALUES (4, 'Mark Johnson', 'fdh2Jhs^', 0, 729834567, 'markjohnson@example.com', 0, 1, 7, 631.25, 1, '789 Elm St, Anytown USA', '10:45:00', 'path/to/image3.jpg');
-INSERT INTO `user` VALUES (5, 'Samantha Lee', 'fKj4dLh%', 1, 423874956, 'samanthalee@example.com', 0, 0, 0, 0.00, 2, '321 Pine St, Anytown USA', '09:00:00', 'path/to/image4.jpg');
-INSERT INTO `user` VALUES (6, 'William Chen', 'dHk6fJl#', 0, 982735648, 'williamchen@example.com', 0, 0, 0, 0.00, 1, '654 Birch Rd, Anytown USA', '16:20:00', 'path/to/image5.jpg');
-INSERT INTO `user` VALUES (7, 'Emily Kim', 'dsJ8Hfh^', 1, 657823419, 'emilykim@example.com', 0, 0, 0, 0.00, 0, '987 Maple St, Anytown USA', '11:10:00', 'path/to/image6.jpg');
-INSERT INTO `user` VALUES (8, 'Hannah Jones', '83uIv29J', 1, 437206554, 'hjones@gmail.com', 0, 1, 8, 1645.32, 0, '123 Main St., Apt. 456, Boston, MA 02118', '23:15:00', NULL);
-INSERT INTO `user` VALUES (9, 'Tom Smith', 'KfY8J7W6', 0, 942772803, 'tsmith@yahoo.com', 0, 0, 0, 0.00, 1, '456 Park Ave., New York, NY 10022', '14:10:00', NULL);
-INSERT INTO `user` VALUES (10, 'Emily Johnson', 'l04pLhj7', 1, 897602841, 'ejohnson@hotmail.com', 0, 1, 3, 788.99, 2, '789 Cedar St., San Francisco, CA 94109', '09:35:00', NULL);
-INSERT INTO `user` VALUES (11, 'Ethan Lee', 'x7J9KtS1', 0, 155986930, 'elee@gmail.com', 0, 1, 12, 2750.21, 1, '456 Park Ave., New York, NY 10022', '17:22:00', NULL);
-INSERT INTO `user` VALUES (12, 'Olivia Davis', 'J8bHcE2r', 1, 176409078, 'odavis@yahoo.com', 0, 0, 0, 0.00, 0, '789 Cedar St., San Francisco, CA 94109', '11:45:00', NULL);
+INSERT INTO `user` VALUES (1, 'Harry Hill', 'sdavs3', 3, 1234567890, 'harryhill@example.com', 1, 10, 100.50, 0, '123 Main St, Anytown USA', '15:30:00', '/path/to/image.jpg');
+INSERT INTO `user` VALUES (2, 'John Doe', 'sdf1Hjks%', 0, 328593827, 'johndoe@example.com', 1, 10, 899.99, 1, '123 Main St, Anytown USA', '18:15:00', 'path/to/image1.jpg');
+INSERT INTO `user` VALUES (3, 'Jane Smith', 'dgh0fT%hG', 1, 827349020, 'janesmith@example.com', 1, 5, 450.00, 0, '456 Oak Ave, Anytown USA', '14:30:00', 'path/to/image2.jpg');
+INSERT INTO `user` VALUES (4, 'Mark Johnson', 'fdh2Jhs^', 0, 729834567, 'markjohnson@example.com', 1, 7, 631.25, 1, '789 Elm St, Anytown USA', '10:45:00', 'path/to/image3.jpg');
+INSERT INTO `user` VALUES (5, 'Samantha Lee', 'fKj4dLh%', 1, 423874956, 'samanthalee@example.com', 0, 0, 0.00, 2, '321 Pine St, Anytown USA', '09:00:00', 'path/to/image4.jpg');
+INSERT INTO `user` VALUES (6, 'William Chen', 'dHk6fJl#', 0, 982735648, 'williamchen@example.com', 0, 0, 0.00, 1, '654 Birch Rd, Anytown USA', '16:20:00', 'path/to/image5.jpg');
+INSERT INTO `user` VALUES (7, 'Emily Kim', 'dsJ8Hfh^', 1, 657823419, 'emilykim@example.com', 0, 0, 0.00, 0, '987 Maple St, Anytown USA', '11:10:00', 'path/to/image6.jpg');
+INSERT INTO `user` VALUES (8, 'Hannah Jones', '83uIv29J', 1, 437206554, 'hjones@gmail.com', 1, 8, 1645.32, 0, '123 Main St., Apt. 456, Boston, MA 02118', '23:15:00', NULL);
+INSERT INTO `user` VALUES (9, 'Tom Smith', 'KfY8J7W6', 0, 942772803, 'tsmith@yahoo.com', 0, 0, 0.00, 1, '456 Park Ave., New York, NY 10022', '14:10:00', NULL);
+INSERT INTO `user` VALUES (10, 'Emily Johnson', 'l04pLhj7', 1, 897602841, 'ejohnson@hotmail.com', 1, 3, 788.99, 2, '789 Cedar St., San Francisco, CA 94109', '09:35:00', NULL);
+INSERT INTO `user` VALUES (11, 'Ethan Lee', 'x7J9KtS1', 0, 155986930, 'elee@gmail.com', 1, 12, 2750.21, 1, '456 Park Ave., New York, NY 10022', '17:22:00', NULL);
+INSERT INTO `user` VALUES (12, 'Olivia Davis', 'J8bHcE2r', 1, 176409078, 'odavis@yahoo.com', 0, 0, 0.00, 0, '789 Cedar St., San Francisco, CA 94109', '11:45:00', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
