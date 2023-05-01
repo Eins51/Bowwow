@@ -1,87 +1,62 @@
 <div class="span3">
-					<div class="sidebar">
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css"/>
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+<div class="sidebar">
+<body class="mdui-drawer-body-left mdui-theme-primary-white mdui-theme-accent-blue">
+    <!-- 顶部框 -->
+        <div class="mdui-toolbar mdui-color-theme" style="color:#D8CCC4;" id="side">
+            <a class="mdui-btn mdui-btn-icon">
+                <i class="mdui-icon material-icons">format_indent_decrease</i>
+            </a>
 
-
-<ul class="widget widget-menu unstyled">
-							<li>
-								<a class="collapsed" data-toggle="collapse" href="#togglePages">
-									<i class="menu-icon icon-cog"></i>
-									<i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right"></i>
-									Order Management
-								</a>
-								<ul id="togglePages" class="collapse unstyled">
-									<li>
-										<a href="todays-orders.php">
-											<i class="icon-tasks"></i>
-											Today's Orders
-  <?php
-  $f1="00:00:00";
-$from=date('Y-m-d')." ".$f1;
-$t1="23:59:59";
-$to=date('Y-m-d')." ".$t1;
- $result = mysqli_query($con,"SELECT * FROM Orders where orderDate Between '$from' and '$to'");
-$num_rows1 = mysqli_num_rows($result);
-{
-?>
-											<b class="label orange pull-right"><?php echo htmlentities($num_rows1); ?></b>
-											<?php } ?>
-										</a>
-									</li>
-									<li>
-										<a href="pending-orders.php">
-											<i class="icon-tasks"></i>
-											Pending Orders
-										<?php	
-	$status='Delivered';									 
-$ret = mysqli_query($con,"SELECT * FROM Orders where orderStatus!='$status' || orderStatus is null ");
-$num = mysqli_num_rows($ret);
-{?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
-<?php } ?>
-										</a>
-									</li>
-									<li>
-										<a href="delivered-orders.php">
-											<i class="icon-inbox"></i>
-											Delivered Orders
-								<?php	
-	$status='Delivered';									 
-$rt = mysqli_query($con,"SELECT * FROM Orders where orderStatus='$status'");
-$num1 = mysqli_num_rows($rt);
-{?><b class="label green pull-right"><?php echo htmlentities($num1); ?></b>
-<?php } ?>
-
-										</a>
-									</li>
-								</ul>
-							</li>
-							
-							<li>
-								<a href="manage-users.php">
-									<i class="menu-icon icon-group"></i>
-									Manage users
-								</a>
-							</li>
-						</ul>
-
-
-						<ul class="widget widget-menu unstyled">
-                                <li><a href="category.php"><i class="menu-icon icon-tasks"></i> Create Category </a></li>
-                                <li><a href="subcategory.php"><i class="menu-icon icon-tasks"></i>Sub Category </a></li>
-                                <li><a href="insert-product.php"><i class="menu-icon icon-paste"></i>Insert Product </a></li>
-                                <li><a href="manage-products.php"><i class="menu-icon icon-table"></i>Manage Products </a></li>
-                        
-                            </ul><!--/.widget-nav-->
-
-						<ul class="widget widget-menu unstyled">
-							<li><a href="user-logs.php"><i class="menu-icon icon-tasks"></i>User Login Log </a></li>
-							
-							<li>
-								<a href="logout.php">
-									<i class="menu-icon icon-signout"></i>
-									Logout
-								</a>
-							</li>
-						</ul>
-
-					</div><!--/.sidebar-->
-				</div><!--/.span3-->
+            <div class="mdui-toolbar-spacer"></div> <!--会将该元素两边的内容推向两侧。-->
+            <a class="mdui-btn mdui-btn-icon" >
+                <i class="mdui-icon material-icons"onclick="window.location=`myprofile.php`;">account_circle</i>
+            </a>
+            <div class="mdui-chip" style="line-height:normal">
+			<button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="window.location=`login.php`;">
+				Log out
+			</button>
+            </div>
+        </div>
+    <!--侧边栏-->
+    <div class="mdui-drawer" id="siderbar" style="background-color: #D8CCC4;">
+	<div>
+		<h1 style="text-transform:capitalize; font-size: 22; color: gray" ><!--暂时写死，看情况是否需要连接数据库-->
+		<img src="../images/admin_avatar.png" alt="" id="dog1" style="width:50px; height: 50px;"> Admin_01
+			<i class="mdui-icon material-icons" onclick="window.location=`myprofile.php`;">edit</i>
+		</h1>
+	
+	</div>
+        <div>
+        <ul class="mdui-list">
+            <li class="mdui-list-item mdui-ripple" onclick="window.location=`myprofile.php`;" style="color: white;">
+                <i class="mdui-icon material-icons">account_circle</i>
+                <div class="mdui-list-item-content">&nbsp My Profile</div>
+            </li>
+        <li class="mdui-list-item mdui-ripple" onclick="window.location=`product.php`;" style="color: white;">
+            <i class="mdui-icon material-icons">local_mall</i>
+            <div class="mdui-list-item-content">&nbsp Category Management</div>
+        </li>
+        <li class="mdui-list-item mdui-ripple " onclick="window.location=`category.php`;" style="color: white;">
+            <i class="mdui-icon material-icons">apps</i>
+            <div class="mdui-list-item-content" >&nbsp Product Management</div>
+        </li>
+        <li class="mdui-list-item mdui-ripple " onclick="window.location=`user.php`;" style="color: white;">
+            <i class="mdui-icon material-icons">person</i>
+            <div class="mdui-list-item-content">&nbsp User Management</div>
+        </li>
+        <li class="mdui-list-item mdui-ripple " onclick="window.location=`order.php`;" style="color: white;">
+            <i class="mdui-icon material-icons">assignment</i>
+            <div class="mdui-list-item-content">&nbsp Order Management</div>
+        </li>
+        <li class="mdui-list-item mdui-ripple " onclick="window.location=`coupon.php`;" style="color: white;">
+            <i class="mdui-icon material-icons">card_giftcard</i>
+            <div class="mdui-list-item-content">&nbsp Coupon Management</div>
+        </li>
+        </ul>
+    </div>
+	<div>
+        <img src="../images/sidebar_dog.png" alt="" id="dog" style="position:absolute; bottom: 0">
+		</div>
+		</div>
