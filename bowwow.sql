@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2023 at 06:58 PM
+-- Generation Time: May 01, 2023 at 08:52 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -152,6 +152,36 @@ CREATE TABLE `pet` (
   `user_id` int(11) NOT NULL COMMENT 'user id: foreign key referring ''user'' table'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `pet`
+--
+
+INSERT INTO `pet` (`id`, `name`, `gender`, `breed`, `size`, `age`, `birthday`, `user_id`) VALUES
+(1, 'Buddy', 0, 'Golden Retriever', 'Medium', 4, '2019-02-14', 1),
+(2, 'Luna', 1, 'Siamese', 'Small', 3, '2020-04-23', 2),
+(3, 'Max', 0, 'Labrador Retriever', 'Large', 5, '2017-06-05', 3),
+(4, 'Smokey', 0, 'Russian Blue', 'Medium', 4, '2018-09-08', 4),
+(5, 'Daisy', 1, 'Bulldog', 'Medium', 7, '2016-01-22', 5),
+(6, 'Cocoa', 0, 'Beagle', 'Small', 2, '2020-11-01', 6),
+(7, 'Milo', 0, 'Maine Coon', 'Large', 7, '2015-07-17', 7),
+(8, 'Maggie', 1, 'Siberian Husky', 'Large', 5, '2017-08-04', 8),
+(9, 'Oliver', 0, 'Poodle', 'Small', 3, '2019-10-21', 9),
+(10, 'Chloe', 1, 'Chihuahua', 'Small', 4, '2018-12-03', 10),
+(11, 'Rocky', 0, 'German Shepherd', 'Large', 7, '2016-02-11', 11),
+(12, 'Bella', 1, 'Persian', 'Small', 3, '2020-03-29', 12),
+(13, 'Benji', 0, 'Siberian Husky', 'Medium', 4, '2019-02-01', 7),
+(14, 'Luna', 1, 'Persian', 'Small', 4, '2018-05-12', 9),
+(15, 'Max', 0, 'Golden Retriever', 'Large', 2, '2020-10-19', 3),
+(16, 'Tofu', 0, 'Dwarf Hamster', 'Small', 1, '2021-07-15', 6),
+(17, 'Lucy', 1, 'Scottish Fold', 'Medium', 3, '2019-11-20', 1),
+(18, 'Buddy', 0, 'Beagle', 'Medium', 3, '2020-04-30', 4),
+(19, 'Noodle', 1, 'Sphynx', 'Small', 3, '2020-02-22', 8),
+(20, 'Charlie', 0, 'Poodle', 'Medium', 4, '2019-01-01', 2),
+(21, 'Mittens', 1, 'Siamese', 'Small', 2, '2020-08-07', 5),
+(22, 'Rocky', 0, 'German Shepherd', 'Large', 2, '2021-01-01', 10),
+(23, 'Cocoa', 1, 'Tabby', 'Small', 3, '2019-06-13', 11),
+(24, 'Cotton', 0, 'Angora Rabbit', 'Medium', 4, '2018-08-08', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -169,6 +199,27 @@ CREATE TABLE `product` (
   `description` varchar(255) DEFAULT NULL,
   `image_path` varchar(255) NOT NULL COMMENT 'for product image'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `name`, `cate_id`, `is_hot`, `price`, `stock_qty`, `status`, `description`, `image_path`) VALUES
+(1, 'Royal Canin Adult Dry Dog Food', 1, 1, '39.99', 100, 0, 'This dry dog food is specially formulated for adult dogs to support healthy digestion and strong immune systems. Made with high-quality proteins, vitamins, and minerals, this dog food provides complete and balanced nutrition for your furry friend.', 'royal-canin-dog-food.jpg'),
+(2, 'Hill\'s Science Diet Wet Cat Food Variety Pack', 1, 0, '24.99', 50, 0, 'This variety pack of wet cat food includes four different flavors to keep your cat interested and satisfied. Made with natural ingredients and no artificial preservatives, this cat food provides complete and balanced nutrition for adult cats.', 'hills-science-diet-cat-food.jpg'),
+(3, 'PetSafe Drinkwell 360 Pet Fountain', 2, 1, '49.95', 25, 0, 'This pet fountain provides fresh, filtered water for your furry friend to encourage hydration and improve their overall health. With multiple spout rings, this fountain is perfect for households with multiple pets.', 'drinwell-pet-fountain.jpg'),
+(4, 'Vet\'s Best Allergy Itch Relief Dog Shampoo', 2, 0, '9.99', 75, 0, 'This dog shampoo is formulated with natural ingredients to soothe and relieve itchy, irritated skin. Gentle and safe for frequent use, this shampoo is perfect for dogs with allergies or sensitive skin.', 'vets-best-dog-shampoo.jpg'),
+(5, 'FURminator Undercoat Deshedding Tool for Dogs', 3, 1, '29.99', 20, 0, 'This deshedding tool is designed to reduce shedding by up to 90% by removing loose fur from your dog\'s undercoat without damaging their topcoat. Suitable for all coat types, this tool helps keep your home free of pet hair.', 'furminator-dog-brush.jpg'),
+(6, 'Andis ProClip AGC2 UltraEdge Clipper', 3, 0, '199.99', 5, 0, 'This professional-grade clipper is perfect for grooming your dog at home. With a powerful motor and detachable blade, this clipper is versatile and easy to use for all coat types.', 'andis-dog-clipper.jpg'),
+(7, 'KONG Classic Dog Toy', 4, 1, '9.99', 100, 0, 'This classic dog toy is made with durable rubber to withstand even the toughest chewers. Perfect for stuffing with treats or peanut butter, this toy will keep your dog entertained for hours.', 'kong-dog-toy.jpg'),
+(8, 'Outward Hound Nina Ottosson Dog Tornado Puzzle Toy', 4, 0, '24.99', 30, 0, 'This interactive puzzle toy is perfect for keeping your dog entertained and mentally stimulated. With multiple layers and hidden compartments, this toy requires your dog to use their problem-solving skills to find the treats.', 'nina-ottosson-dog-toy.jpg'),
+(9, 'Organic Chicken & Brown Rice Recipe Dog Food', 1, 1, '49.99', 50, 0, 'This premium dog food is made with high-quality organic chicken and brown rice, providing a balanced and nutritious meal for your furry friend.', 'organic-chicken-brown-rice-dog-food.jpg'),
+(10, 'Teeth Cleaning Dog Treats', 2, 0, '14.99', 100, 0, 'These dental chews help clean your dog\'s teeth and freshen their breath, while also providing a tasty treat they\'ll love.', 'teeth-cleaning-dog-treats.jpg'),
+(11, 'Cat Grooming Brush', 3, 0, '9.99', 20, 0, 'This brush is designed to help remove loose fur and prevent hairballs in cats, while also providing a relaxing massage for your feline friend.', 'cat-grooming-brush.jpg'),
+(12, 'Interactive Cat Toy', 4, 1, '19.99', 30, 0, 'This interactive toy features a variety of fun activities to keep your cat entertained and engaged, including a ball track, scratching pad, and hanging toys.', 'interactive-cat-toy.jpg'),
+(13, 'Pet Carrier Backpack', 5, 0, '39.99', 10, 0, 'This backpack-style pet carrier is perfect for small dogs and cats, with adjustable straps and breathable mesh panels for comfort on the go.', 'pet-carrier-backpack.jpg'),
+(14, 'Scratching Post with Perch', 6, 1, '59.99', 5, 0, 'This multi-level scratching post features a cozy perch for your cat to relax on, as well as a variety of scratching surfaces to help keep their claws healthy and sharp.', 'scratching-post-with-perch.jpg'),
+(15, 'Large Dog Bed', 1, 0, '79.99', 15, 0, 'This comfortable dog bed is perfect for larger breeds, with a soft and supportive mattress and a durable, washable cover.', 'large-dog-bed.jpg');
 
 -- --------------------------------------------------------
 
@@ -323,13 +374,13 @@ ALTER TABLE `order_detail`
 -- AUTO_INCREMENT for table `pet`
 --
 ALTER TABLE `pet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `user`
