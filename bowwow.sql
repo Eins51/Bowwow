@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : xampp_mysql
- Source Server Type    : MySQL
+ Source Server         : maria_db
+ Source Server Type    : MariaDB
  Source Server Version : 100422 (10.4.22-MariaDB)
  Source Host           : 127.0.0.1:3306
  Source Schema         : bowwow
 
- Target Server Type    : MySQL
+ Target Server Type    : MariaDB
  Target Server Version : 100422 (10.4.22-MariaDB)
  File Encoding         : 65001
 
- Date: 02/05/2023 04:04:06
+ Date: 02/05/2023 21:26:41
 */
 
 SET NAMES utf8mb4;
@@ -22,9 +22,9 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `address`;
 CREATE TABLE `address`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL COMMENT 'user id: foreign key referring \'user\' table',
-  `is_default` tinyint NOT NULL COMMENT '0: no, 1: yes',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT 'user id: foreign key referring \'user\' table',
+  `is_default` tinyint(4) NOT NULL COMMENT '0: no, 1: yes',
   `country` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `province` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `city` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `address`  (
   `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'address details (house number and street name)',
   `postal_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `user_id`(`user_id` ASC) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `address_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -75,10 +75,10 @@ INSERT INTO `address` VALUES (30, 12, 0, 'United States', 'Kentucky', 'Louisvill
 -- ----------------------------
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `gender` tinyint NULL DEFAULT NULL COMMENT '0: male, 1: female, 2: others, 3: secrecy',
+  `gender` tinyint(4) NULL DEFAULT NULL COMMENT '0: male, 1: female, 2: others, 3: secrecy',
   `phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `image_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'for headshots',
@@ -95,14 +95,14 @@ INSERT INTO `admin` VALUES (1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 3, '
 -- ----------------------------
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `status` tinyint NOT NULL COMMENT '0: activated, 1: forbidden',
-  `rank` int NOT NULL,
+  `status` tinyint(4) NOT NULL COMMENT '0: activated, 1: forbidden',
+  `rank` int(11) NOT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `image_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'for category icon',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `rank`(`rank` ASC) USING BTREE
+  UNIQUE INDEX `rank`(`rank`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -120,11 +120,11 @@ INSERT INTO `category` VALUES (6, 'Furniture', 0, 6, 'Pet beds, houses and furni
 -- ----------------------------
 DROP TABLE IF EXISTS `coupon`;
 CREATE TABLE `coupon`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `category` tinyint NOT NULL COMMENT '0: discount coupon, 1: voucher, 2: cash coupon',
+  `category` tinyint(4) NOT NULL COMMENT '0: discount coupon, 1: voucher, 2: cash coupon',
   `value` decimal(10, 2) NOT NULL,
-  `quantity` int NOT NULL,
+  `quantity` int(11) NOT NULL,
   `start_time` datetime NOT NULL,
   `end_time` datetime NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -154,13 +154,13 @@ INSERT INTO `coupon` VALUES (15, '$20 voucher for pet boarding', 1, 20.00, 100, 
 -- ----------------------------
 DROP TABLE IF EXISTS `coupon_detail`;
 CREATE TABLE `coupon_detail`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL COMMENT 'user id: foreign key referring \'user\' table',
-  `coupon_id` int NOT NULL COMMENT 'coupon id: foreign key referring \'coupon\' table',
-  `coupon_num` int NOT NULL COMMENT 'number of this coupon item that user owns',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT 'user id: foreign key referring \'user\' table',
+  `coupon_id` int(11) NOT NULL COMMENT 'coupon id: foreign key referring \'coupon\' table',
+  `coupon_num` int(11) NOT NULL COMMENT 'number of this coupon item that user owns',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `coupon_detail_ibfk_1`(`user_id` ASC) USING BTREE,
-  INDEX `coupon_detail_ibfk_2`(`coupon_id` ASC) USING BTREE,
+  INDEX `coupon_detail_ibfk_1`(`user_id`) USING BTREE,
+  INDEX `coupon_detail_ibfk_2`(`coupon_id`) USING BTREE,
   CONSTRAINT `coupon_detail_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `coupon_detail_ibfk_2` FOREIGN KEY (`coupon_id`) REFERENCES `coupon` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -202,22 +202,22 @@ INSERT INTO `coupon_detail` VALUES (28, 15, 14, 4);
 -- ----------------------------
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `amount` decimal(10, 2) NOT NULL COMMENT 'total amount; $',
-  `coupon_id` int NULL DEFAULT NULL COMMENT 'coupon id: foreign key referring \'coupon_detail\' table',
-  `user_id` int NOT NULL COMMENT 'user id: foreign key referring \'user\' table',
-  `address_id` int NOT NULL COMMENT 'address id: foreign key referring \'address\' table',
-  `payment` tinyint NOT NULL COMMENT 'payment method; 0: PayPal, 1: Credit card, 2: Alipay',
-  `status` tinyint NOT NULL COMMENT '0: unpaid, 1: unshipped, 2: shipped, 3: completed, 4: canceled',
+  `coupon_id` int(11) NULL DEFAULT NULL COMMENT 'coupon id: foreign key referring \'coupon_detail\' table',
+  `user_id` int(11) NOT NULL COMMENT 'user id: foreign key referring \'user\' table',
+  `address_id` int(11) NOT NULL COMMENT 'address id: foreign key referring \'address\' table',
+  `payment` tinyint(4) NOT NULL COMMENT 'payment method; 0: PayPal, 1: Credit card, 2: Alipay',
+  `status` tinyint(4) NOT NULL COMMENT '0: unpaid, 1: unshipped, 2: shipped, 3: completed, 4: canceled',
   `create_time` datetime NOT NULL,
   `pay_time` datetime NOT NULL,
   `delivery_time` datetime NOT NULL,
   `shipped_time` datetime NOT NULL,
   `completed_time` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `coupon_id`(`coupon_id` ASC) USING BTREE,
-  INDEX `user_id`(`user_id` ASC) USING BTREE,
-  INDEX `address_id`(`address_id` ASC) USING BTREE,
+  INDEX `coupon_id`(`coupon_id`) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE,
+  INDEX `address_id`(`address_id`) USING BTREE,
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`coupon_id`) REFERENCES `coupon_detail` (`coupon_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_ibfk_3` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -237,13 +237,13 @@ INSERT INTO `order` VALUES (5, 75.00, NULL, 5, 5, 1, 1, '2023-04-29 17:30:00', '
 -- ----------------------------
 DROP TABLE IF EXISTS `order_detail`;
 CREATE TABLE `order_detail`  (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `order_id` int NOT NULL COMMENT 'order id: foreign key referring \'order\' table',
-  `item_id` int NOT NULL COMMENT 'product id: foreign key referring \'product\' table',
-  `item_num` int NOT NULL COMMENT 'number of this product item',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) NOT NULL COMMENT 'order id: foreign key referring \'order\' table',
+  `item_id` int(11) NOT NULL COMMENT 'product id: foreign key referring \'product\' table',
+  `item_num` int(11) NOT NULL COMMENT 'number of this product item',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `item_id`(`item_id` ASC) USING BTREE,
-  INDEX `order_detail_ibfk_1`(`order_id` ASC) USING BTREE,
+  INDEX `item_id`(`item_id`) USING BTREE,
+  INDEX `order_detail_ibfk_1`(`order_id`) USING BTREE,
   CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `order_detail_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -267,16 +267,16 @@ INSERT INTO `order_detail` VALUES (10, 5, 5, 3);
 -- ----------------------------
 DROP TABLE IF EXISTS `pet`;
 CREATE TABLE `pet`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `gender` tinyint NULL DEFAULT NULL COMMENT '0: male, 1: female, 2: others, 3: secrecy',
+  `gender` tinyint(4) NULL DEFAULT NULL COMMENT '0: male, 1: female, 2: others, 3: secrecy',
   `breed` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `size` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `age` int NULL DEFAULT NULL,
+  `age` int(11) NULL DEFAULT NULL,
   `birthday` date NULL DEFAULT NULL,
-  `user_id` int NOT NULL COMMENT 'user id: foreign key referring \'user\' table',
+  `user_id` int(11) NOT NULL COMMENT 'user id: foreign key referring \'user\' table',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `user_id`(`user_id` ASC) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE,
   CONSTRAINT `pet_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -320,73 +320,62 @@ INSERT INTO `pet` VALUES (31, 'Penny', 1, 'Exotic Shorthair Cat', 'Medium', 4, '
 -- ----------------------------
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `cate_id` int NOT NULL COMMENT 'category id: foreign key referring \'category\' table',
-  `is_hot` tinyint NOT NULL COMMENT '0: no, 1: yes',
+  `cate_id` int(11) NOT NULL COMMENT 'category id: foreign key referring \'category\' table',
+  `is_hot` tinyint(4) NOT NULL COMMENT '0: no, 1: yes',
   `price` decimal(10, 2) NOT NULL COMMENT '$',
-  `stock_qty` int NOT NULL COMMENT 'stock quantity',
-  `status` tinyint NOT NULL COMMENT '0: shelved, 1: unshelved',
+  `stock_qty` int(11) NOT NULL COMMENT 'stock quantity',
+  `status` tinyint(4) NOT NULL COMMENT '0: shelved, 1: unshelved',
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `image_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'for product image',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `cate_id`(`cate_id` ASC) USING BTREE,
+  INDEX `cate_id`(`cate_id`) USING BTREE,
   CONSTRAINT `product_ibfk_1` FOREIGN KEY (`cate_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES (1, 'Purina ONE Natural Dry Dog Food', 1, 1, 21.49, 100, 1, 'Purina ONE Natural dry dog food with real chicken and rice for adult dogs.', 'product1.jpg');
-INSERT INTO `product` VALUES (2, 'Hill\'s Science Diet Dry Dog Food', 1, 1, 32.99, 150, 1, 'Hill\'s Science Diet Adult Sensitive Stomach & Skin Chicken Recipe Dry Dog Food.', 'product2.jpg');
-INSERT INTO `product` VALUES (3, 'Fancy Feast Gravy Lovers Wet Cat Food', 1, 0, 16.79, 200, 1, 'Fancy Feast Gravy Lovers Wet Cat Food Variety Pack, 3 oz. cans, 24 count.', 'product3.jpg');
-INSERT INTO `product` VALUES (4, 'Blue Buffalo Life Protection Formula Dry Dog Food', 1, 1, 54.98, 180, 1, 'Blue Buffalo Life Protection Formula Adult Chicken & Brown Rice Recipe Dry Dog Food.', 'product4.jpg');
-INSERT INTO `product` VALUES (5, 'Wellness CORE Grain-Free Dry Cat Food', 1, 0, 40.89, 120, 1, 'Wellness CORE Grain-Free Original Turkey & Chicken Recipe Dry Cat Food.', 'product5.jpg');
-INSERT INTO `product` VALUES (6, 'Frontline Plus Flea & Tick Treatment for Dogs', 2, 1, 45.99, 250, 1, 'Frontline Plus Flea and Tick Treatment for dogs (45-88 lbs) - 3 Doses.', 'product6.jpg');
-INSERT INTO `product` VALUES (7, 'Nutramax Cosequin Joint Health Supplement', 2, 1, 34.95, 100, 1, 'Nutramax Cosequin Maximum Strength Joint Health Supplement for Dogs, 250 Count.', 'product7.jpg');
-INSERT INTO `product` VALUES (8, 'Zesty Paws Allergy Immune Supplement for Dogs', 2, 0, 25.96, 300, 1, 'Zesty Paws Allergy Immune Supplement for Dogs - with Omega 3 Wild Alaskan Salmon Fish Oil & EpiCor + Digestive Prebiotics & Probiotics.', 'product8.jpg');
-INSERT INTO `product` VALUES (9, 'Burt\'s Bees for Dogs Natural Itch Soothing Shampoo', 3, 0, 7.49, 200, 1, 'Burt\'s Bees for Dogs Natural Itch Soothing Shampoo with Honeysuckle.', 'product9.jpg');
-INSERT INTO `product` VALUES (10, 'FURminator deShedding Tool for Dogs', 3, 1, 29.95, 100, 1, 'FURminator deShedding Tool for Dogs, Large, Long Hair.', 'product10.jpg');
-INSERT INTO `product` VALUES (11, 'KONG Classic Dog Toy', 4, 1, 7.99, 500, 1, 'KONG Classic Dog Toy, Durable Natural Rubber- Fun to Chew, Chase and Fetch.', 'product11.jpg');
-INSERT INTO `product` VALUES (12, 'Petstages Tower of Tracks Cat Toy', 4, 1, 24.99, 80, 1, 'Petstages Tower of Tracks Cat Toy - 3 Level of Interactive Play - Circle Track with Moving Balls Satisfies Kitty\'s Hunting, Chasing and Exercising Needs.', 'product12.png');
-INSERT INTO `product` VALUES (13, 'Benebone Real Flavor Wishbone Dog Chew Toy', 4, 0, 11.59, 120, 1, 'Benebone Real Flavor Wishbone Dog Chew Toy, Made in USA, Medium, Real Chicken Flavor.', 'product13.png');
-INSERT INTO `product` VALUES (14, 'SmartyKat Skitter Critters Cat Toy', 4, 0, 2.99, 400, 1, 'SmartyKat Skitter Critters Cat Toy, Catnip Mice, 3/pkg.', 'product14.png');
-INSERT INTO `product` VALUES (15, 'AmazonBasics Two-Door Top-Load Pet Kennel', 5, 1, 29.99, 100, 1, 'AmazonBasics Two-Door Top-Load Hard-Sided Pet Travel Carrier, 23-Inch.', 'product15.png');
-INSERT INTO `product` VALUES (16, 'Sherpa Travel Original Deluxe Airline Approved Pet Carrier', 5, 0, 73.16, 50, 1, 'Sherpa Travel Original Deluxe Airline Approved Pet Carrier, Large, Black.', 'product16.png');
-INSERT INTO `product` VALUES (17, 'Furhaven Pet Dog Bed', 6, 1, 37.99, 100, 1, 'Furhaven Pet Dog Bed - Orthopedic Ultra Plush Faux Fur Ergonomic Luxe Lounger Cradle Mattress Contour Pet Bed for Dogs and Cats, Gray, Large.', 'product17.png');
-INSERT INTO `product` VALUES (18, 'MidWest Homes for Pets Deluxe Super Plush Pet Beds', 6, 0, 14.99, 200, 1, 'MidWest Homes for Pets Deluxe Super Plush Pet Beds, Machine Wash & Dryer Friendly, 1-Year Warranty.', 'product18.png');
-INSERT INTO `product` VALUES (19, 'Purina Pro Plan High Protein Dry Dog Food', 1, 1, 38.48, 80, 1, 'Purina Pro Plan High Protein Dry Dog Food, SPORT Performance 30/20 Formula - 37.5 lb. Bag.', 'product19.png');
-INSERT INTO `product` VALUES (20, 'Merrick Grain-Free Dry Dog Food', 1, 0, 59.99, 60, 1, 'Merrick Grain-Free Dry Dog Food Real Texas Beef + Sweet Potato Recipe - 25 lb. Bag.', 'product20.png');
-INSERT INTO `product` VALUES (21, 'Blue Buffalo Wilderness High Protein Dry Cat Food', 1, 1, 36.98, 140, 1, 'Blue Buffalo Wilderness High Protein, Natural Adult Dry Cat Food, Chicken 12-lb.', 'product21.png');
-INSERT INTO `product` VALUES (22, 'Bayer Animal Health Seresto Flea and Tick Collar for Dogs', 2, 1, 57.98, 90, 1, 'Bayer Animal Health Seresto Flea and Tick Collar for Dogs, 8-Month Tick and Flea Control for Dogs.', 'product22.png');
-INSERT INTO `product` VALUES (23, 'VetriScience Laboratories GlycoFlex Joint Support for Dogs', 2, 0, 39.00, 100, 1, 'VetriScience Laboratories GlycoFlex 3, Hip and Joint Supplement for Dogs, 120 Bite Sized Chews.', 'product23.png');
-INSERT INTO `product` VALUES (24, 'PetHonesty 10-for-1 Dog Multivitamin', 2, 1, 25.99, 120, 1, 'PetHonesty 10-for-1 Dog Multivitamin with Glucosamine - Essential Dog Vitamins with Glucosamine Chondroitin, Probiotics and Omega Fish Oil for Dogs Overall Health.', 'product24.png');
-INSERT INTO `product` VALUES (25, 'Earthbath All Natural Pet Shampoo', 3, 1, 14.99, 100, 1, 'Earthbath All Natural Pet Shampoo - Oatmeal & Aloe, Fragrance Free, 16 oz.', 'product25.png');
-INSERT INTO `product` VALUES (26, 'SmartyKat Skitter Critters Cat Toy', 4, 1, 2.99, 400, 1, 'SmartyKat Skitter Critters Cat Toy, Catnip Mice, 3/pkg.', 'product26.jpg');
-INSERT INTO `product` VALUES (27, 'Benebone Real Flavor Wishbone Dog Chew Toy', 4, 0, 11.59, 120, 1, 'Benebone Real Flavor Wishbone Dog Chew Toy, Made in USA, Medium, Real Chicken Flavor.', 'product27.jpg');
-INSERT INTO `product` VALUES (28, 'Petstages Tower of Tracks Cat Toy', 4, 0, 24.99, 80, 1, 'Petstages Tower of Tracks Cat Toy - 3 Level of Interactive Play - Circle Track with Moving Balls Satisfies Kitty\'s Hunting, Chasing and Exercising Needs.', 'product28.jpg');
-INSERT INTO `product` VALUES (29, 'AmazonBasics Two-Door Top-Load Pet Kennel', 5, 1, 29.99, 100, 1, 'AmazonBasics Two-Door Top-Load Hard-Sided Pet Travel Carrier, 23-Inch.', 'product29.jpg');
-INSERT INTO `product` VALUES (30, 'Sherpa Travel Original Deluxe Airline Approved Pet Carrier', 5, 0, 73.16, 50, 1, 'Sherpa Travel Original Deluxe Airline Approved Pet Carrier, Large, Black.', 'product30.jpg');
-INSERT INTO `product` VALUES (31, 'Furhaven Pet Dog Bed', 6, 1, 37.99, 100, 1, 'Furhaven Pet Dog Bed - Orthopedic Ultra Plush Faux Fur Ergonomic Luxe Lounger Cradle Mattress Contour Pet Bed for Dogs and Cats, Gray, Large.', 'product31.jpg');
-INSERT INTO `product` VALUES (32, 'MidWest Homes for Pets Deluxe Super Plush Pet Beds', 6, 0, 14.99, 200, 1, 'MidWest Homes for Pets Deluxe Super Plush Pet Beds, Machine Wash & Dryer Friendly, 1-Year Warranty.', 'product32.jpg');
-INSERT INTO `product` VALUES (33, 'Purina Pro Plan High Protein Dry Dog Food', 1, 1, 38.48, 80, 1, 'Purina Pro Plan High Protein Dry Dog Food, SPORT Performance 30/20 Formula - 37.5 lb. Bag.', 'product33.jpg');
-INSERT INTO `product` VALUES (34, 'Merrick Grain-Free Dry Dog Food', 1, 0, 59.99, 60, 1, 'Merrick Grain-Free Dry Dog Food Real Texas Beef + Sweet Potato Recipe - 25 lb. Bag.', 'product34.jpg');
-INSERT INTO `product` VALUES (35, 'Blue Buffalo Wilderness High Protein Dry Cat Food', 1, 1, 36.98, 140, 1, 'Blue Buffalo Wilderness High Protein, Natural Adult Dry Cat Food, Chicken 12-lb.', 'product35.jpg');
-INSERT INTO `product` VALUES (36, 'Bayer Animal Health Seresto Flea and Tick Collar for Dogs', 2, 1, 57.98, 90, 1, 'Bayer Animal Health Seresto Flea and Tick Collar for Dogs, 8-Month Tick and Flea Control for Dogs.', 'product36.jpg');
+INSERT INTO `product` VALUES (1, 'Purina ONE Natural Dry Dog Food', 1, 1, 21.49, 100, 1, 'Purina ONE Natural dry dog food with real chicken and rice for adult dogs.', '1.jfif');
+INSERT INTO `product` VALUES (2, 'Hill\'s Science Diet Dry Dog Food', 1, 1, 32.99, 150, 1, 'Hill\'s Science Diet Adult Sensitive Stomach & Skin Chicken Recipe Dry Dog Food.', '2.jfif');
+INSERT INTO `product` VALUES (3, 'Fancy Feast Gravy Lovers Wet Cat Food', 1, 0, 16.79, 200, 1, 'Fancy Feast Gravy Lovers Wet Cat Food Variety Pack, 3 oz. cans, 24 count.', '3.jfif');
+INSERT INTO `product` VALUES (4, 'Blue Buffalo Life Protection Formula Dry Dog Food', 1, 1, 54.98, 180, 1, 'Blue Buffalo Life Protection Formula Adult Chicken & Brown Rice Recipe Dry Dog Food.', '4.jfif');
+INSERT INTO `product` VALUES (5, 'Wellness CORE Grain-Free Dry Cat Food', 1, 0, 40.89, 120, 1, 'Wellness CORE Grain-Free Original Turkey & Chicken Recipe Dry Cat Food.', '5.jfif');
+INSERT INTO `product` VALUES (6, 'Frontline Plus Flea & Tick Treatment for Dogs', 2, 1, 45.99, 250, 1, 'Frontline Plus Flea and Tick Treatment for dogs (45-88 lbs) - 3 Doses.', '6.jfif');
+INSERT INTO `product` VALUES (7, 'Nutramax Cosequin Joint Health Supplement', 2, 1, 34.95, 100, 1, 'Nutramax Cosequin Maximum Strength Joint Health Supplement for Dogs, 250 Count.', '7.jfif');
+INSERT INTO `product` VALUES (8, 'Zesty Paws Allergy Immune Supplement for Dogs', 2, 0, 25.96, 300, 1, 'Zesty Paws Allergy Immune Supplement for Dogs - with Omega 3 Wild Alaskan Salmon Fish Oil & EpiCor + Digestive Prebiotics & Probiotics.', '8.jfif');
+INSERT INTO `product` VALUES (9, 'Burt\'s Bees for Dogs Natural Itch Soothing Shampoo', 3, 0, 7.49, 200, 1, 'Burt\'s Bees for Dogs Natural Itch Soothing Shampoo with Honeysuckle.', '9.jfif');
+INSERT INTO `product` VALUES (10, 'FURminator deShedding Tool for Dogs', 3, 1, 29.95, 100, 1, 'FURminator deShedding Tool for Dogs, Large, Long Hair.', '10.jfif');
+INSERT INTO `product` VALUES (11, 'KONG Classic Dog Toy', 4, 1, 7.99, 500, 1, 'KONG Classic Dog Toy, Durable Natural Rubber- Fun to Chew, Chase and Fetch.', '11.jfif');
+INSERT INTO `product` VALUES (12, 'Petstages Tower of Tracks Cat Toy', 4, 1, 24.99, 80, 1, 'Petstages Tower of Tracks Cat Toy - 3 Level of Interactive Play - Circle Track with Moving Balls Satisfies Kitty\'s Hunting, Chasing and Exercising Needs.', '12.jfif');
+INSERT INTO `product` VALUES (13, 'Benebone Real Flavor Wishbone Dog Chew Toy', 4, 0, 11.59, 120, 1, 'Benebone Real Flavor Wishbone Dog Chew Toy, Made in USA, Medium, Real Chicken Flavor.', '13.jfif');
+INSERT INTO `product` VALUES (14, 'SmartyKat Skitter Critters Cat Toy', 4, 0, 2.99, 400, 1, 'SmartyKat Skitter Critters Cat Toy, Catnip Mice, 3/pkg.', '14.jfif');
+INSERT INTO `product` VALUES (15, 'AmazonBasics Two-Door Top-Load Pet Kennel', 5, 1, 29.99, 100, 1, 'AmazonBasics Two-Door Top-Load Hard-Sided Pet Travel Carrier, 23-Inch.', '15.jfif');
+INSERT INTO `product` VALUES (16, 'Sherpa Travel Original Deluxe Airline Approved Pet Carrier', 5, 0, 73.16, 50, 1, 'Sherpa Travel Original Deluxe Airline Approved Pet Carrier, Large, Black.', '16.jfif');
+INSERT INTO `product` VALUES (17, 'Furhaven Pet Dog Bed', 6, 1, 37.99, 100, 1, 'Furhaven Pet Dog Bed - Orthopedic Ultra Plush Faux Fur Ergonomic Luxe Lounger Cradle Mattress Contour Pet Bed for Dogs and Cats, Gray, Large.', '17.jfif');
+INSERT INTO `product` VALUES (18, 'MidWest Homes for Pets Deluxe Super Plush Pet Beds', 6, 0, 14.99, 200, 1, 'MidWest Homes for Pets Deluxe Super Plush Pet Beds, Machine Wash & Dryer Friendly, 1-Year Warranty.', '18.jfif');
+INSERT INTO `product` VALUES (19, 'Purina Pro Plan High Protein Dry Dog Food', 1, 1, 38.48, 80, 1, 'Purina Pro Plan High Protein Dry Dog Food, SPORT Performance 30/20 Formula - 37.5 lb. Bag.', '19.jfif');
+INSERT INTO `product` VALUES (20, 'Merrick Grain-Free Dry Dog Food', 1, 0, 59.99, 60, 1, 'Merrick Grain-Free Dry Dog Food Real Texas Beef + Sweet Potato Recipe - 25 lb. Bag.', '20.jfif');
+INSERT INTO `product` VALUES (21, 'Blue Buffalo Wilderness High Protein Dry Cat Food', 1, 1, 36.98, 140, 1, 'Blue Buffalo Wilderness High Protein, Natural Adult Dry Cat Food, Chicken 12-lb.', '21.jfif');
+INSERT INTO `product` VALUES (22, 'Bayer Animal Health Seresto Flea and Tick Collar for Dogs', 2, 1, 57.98, 90, 1, 'Bayer Animal Health Seresto Flea and Tick Collar for Dogs, 8-Month Tick and Flea Control for Dogs.', '22.jfif');
+INSERT INTO `product` VALUES (23, 'VetriScience Laboratories GlycoFlex Joint Support for Dogs', 2, 0, 39.00, 100, 1, 'VetriScience Laboratories GlycoFlex 3, Hip and Joint Supplement for Dogs, 120 Bite Sized Chews.', '23.jfif');
+INSERT INTO `product` VALUES (24, 'PetHonesty 10-for-1 Dog Multivitamin', 2, 1, 25.99, 120, 1, 'PetHonesty 10-for-1 Dog Multivitamin with Glucosamine - Essential Dog Vitamins with Glucosamine Chondroitin, Probiotics and Omega Fish Oil for Dogs Overall Health.', '24.jfif');
+INSERT INTO `product` VALUES (25, 'Earthbath All Natural Pet Shampoo', 3, 1, 14.99, 100, 1, 'Earthbath All Natural Pet Shampoo - Oatmeal & Aloe, Fragrance Free, 16 oz.', '25.jfif');
 
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `gender` tinyint NULL DEFAULT NULL COMMENT '0: male, 1: female, 2: others, 3: secrecy',
+  `gender` tinyint(4) NULL DEFAULT NULL COMMENT '0: male, 1: female, 2: others, 3: secrecy',
   `phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `is_member` tinyint NOT NULL COMMENT '0: no, 1: yes',
-  `payment` tinyint NOT NULL COMMENT 'default payment method; 0: PayPal, 1: Credit card, 2: Alipay',
+  `is_member` tinyint(4) NOT NULL COMMENT '0: no, 1: yes',
+  `payment` tinyint(4) NOT NULL COMMENT 'default payment method; 0: PayPal, 1: Credit card, 2: Alipay',
   `last_online` datetime NOT NULL COMMENT 'last online time',
   `image_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'for avatar',
   PRIMARY KEY (`id`) USING BTREE
