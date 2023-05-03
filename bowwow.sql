@@ -11,7 +11,7 @@
  Target Server Version : 100422 (10.4.22-MariaDB)
  File Encoding         : 65001
 
- Date: 02/05/2023 21:26:41
+ Date: 03/05/2023 23:06:13
 */
 
 SET NAMES utf8mb4;
@@ -75,7 +75,7 @@ INSERT INTO `address` VALUES (30, 12, 0, 'United States', 'Kentucky', 'Louisvill
 -- ----------------------------
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `gender` tinyint(4) NULL DEFAULT NULL COMMENT '0: male, 1: female, 2: others, 3: secrecy',
@@ -83,12 +83,12 @@ CREATE TABLE `admin`  (
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `image_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'for headshots',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES (1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 3, '123456789', 'admin@gmail.com', 'admin_avatar.png');
+INSERT INTO `admin` VALUES (123456, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 3, '1234567890', 'admin1@gmail.com', 'admin_avatar.png');
 
 -- ----------------------------
 -- Table structure for category
@@ -337,31 +337,31 @@ CREATE TABLE `product`  (
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES (1, 'Purina ONE Natural Dry Dog Food', 1, 1, 21.49, 100, 1, 'Purina ONE Natural dry dog food with real chicken and rice for adult dogs.', '1.jfif');
-INSERT INTO `product` VALUES (2, 'Hill\'s Science Diet Dry Dog Food', 1, 1, 32.99, 150, 1, 'Hill\'s Science Diet Adult Sensitive Stomach & Skin Chicken Recipe Dry Dog Food.', '2.jfif');
-INSERT INTO `product` VALUES (3, 'Fancy Feast Gravy Lovers Wet Cat Food', 1, 0, 16.79, 200, 1, 'Fancy Feast Gravy Lovers Wet Cat Food Variety Pack, 3 oz. cans, 24 count.', '3.jfif');
-INSERT INTO `product` VALUES (4, 'Blue Buffalo Life Protection Formula Dry Dog Food', 1, 1, 54.98, 180, 1, 'Blue Buffalo Life Protection Formula Adult Chicken & Brown Rice Recipe Dry Dog Food.', '4.jfif');
-INSERT INTO `product` VALUES (5, 'Wellness CORE Grain-Free Dry Cat Food', 1, 0, 40.89, 120, 1, 'Wellness CORE Grain-Free Original Turkey & Chicken Recipe Dry Cat Food.', '5.jfif');
-INSERT INTO `product` VALUES (6, 'Frontline Plus Flea & Tick Treatment for Dogs', 2, 1, 45.99, 250, 1, 'Frontline Plus Flea and Tick Treatment for dogs (45-88 lbs) - 3 Doses.', '6.jfif');
-INSERT INTO `product` VALUES (7, 'Nutramax Cosequin Joint Health Supplement', 2, 1, 34.95, 100, 1, 'Nutramax Cosequin Maximum Strength Joint Health Supplement for Dogs, 250 Count.', '7.jfif');
-INSERT INTO `product` VALUES (8, 'Zesty Paws Allergy Immune Supplement for Dogs', 2, 0, 25.96, 300, 1, 'Zesty Paws Allergy Immune Supplement for Dogs - with Omega 3 Wild Alaskan Salmon Fish Oil & EpiCor + Digestive Prebiotics & Probiotics.', '8.jfif');
-INSERT INTO `product` VALUES (9, 'Burt\'s Bees for Dogs Natural Itch Soothing Shampoo', 3, 0, 7.49, 200, 1, 'Burt\'s Bees for Dogs Natural Itch Soothing Shampoo with Honeysuckle.', '9.jfif');
-INSERT INTO `product` VALUES (10, 'FURminator deShedding Tool for Dogs', 3, 1, 29.95, 100, 1, 'FURminator deShedding Tool for Dogs, Large, Long Hair.', '10.jfif');
-INSERT INTO `product` VALUES (11, 'KONG Classic Dog Toy', 4, 1, 7.99, 500, 1, 'KONG Classic Dog Toy, Durable Natural Rubber- Fun to Chew, Chase and Fetch.', '11.jfif');
-INSERT INTO `product` VALUES (12, 'Petstages Tower of Tracks Cat Toy', 4, 1, 24.99, 80, 1, 'Petstages Tower of Tracks Cat Toy - 3 Level of Interactive Play - Circle Track with Moving Balls Satisfies Kitty\'s Hunting, Chasing and Exercising Needs.', '12.jfif');
-INSERT INTO `product` VALUES (13, 'Benebone Real Flavor Wishbone Dog Chew Toy', 4, 0, 11.59, 120, 1, 'Benebone Real Flavor Wishbone Dog Chew Toy, Made in USA, Medium, Real Chicken Flavor.', '13.jfif');
-INSERT INTO `product` VALUES (14, 'SmartyKat Skitter Critters Cat Toy', 4, 0, 2.99, 400, 1, 'SmartyKat Skitter Critters Cat Toy, Catnip Mice, 3/pkg.', '14.jfif');
-INSERT INTO `product` VALUES (15, 'AmazonBasics Two-Door Top-Load Pet Kennel', 5, 1, 29.99, 100, 1, 'AmazonBasics Two-Door Top-Load Hard-Sided Pet Travel Carrier, 23-Inch.', '15.jfif');
-INSERT INTO `product` VALUES (16, 'Sherpa Travel Original Deluxe Airline Approved Pet Carrier', 5, 0, 73.16, 50, 1, 'Sherpa Travel Original Deluxe Airline Approved Pet Carrier, Large, Black.', '16.jfif');
-INSERT INTO `product` VALUES (17, 'Furhaven Pet Dog Bed', 6, 1, 37.99, 100, 1, 'Furhaven Pet Dog Bed - Orthopedic Ultra Plush Faux Fur Ergonomic Luxe Lounger Cradle Mattress Contour Pet Bed for Dogs and Cats, Gray, Large.', '17.jfif');
-INSERT INTO `product` VALUES (18, 'MidWest Homes for Pets Deluxe Super Plush Pet Beds', 6, 0, 14.99, 200, 1, 'MidWest Homes for Pets Deluxe Super Plush Pet Beds, Machine Wash & Dryer Friendly, 1-Year Warranty.', '18.jfif');
-INSERT INTO `product` VALUES (19, 'Purina Pro Plan High Protein Dry Dog Food', 1, 1, 38.48, 80, 1, 'Purina Pro Plan High Protein Dry Dog Food, SPORT Performance 30/20 Formula - 37.5 lb. Bag.', '19.jfif');
-INSERT INTO `product` VALUES (20, 'Merrick Grain-Free Dry Dog Food', 1, 0, 59.99, 60, 1, 'Merrick Grain-Free Dry Dog Food Real Texas Beef + Sweet Potato Recipe - 25 lb. Bag.', '20.jfif');
-INSERT INTO `product` VALUES (21, 'Blue Buffalo Wilderness High Protein Dry Cat Food', 1, 1, 36.98, 140, 1, 'Blue Buffalo Wilderness High Protein, Natural Adult Dry Cat Food, Chicken 12-lb.', '21.jfif');
-INSERT INTO `product` VALUES (22, 'Bayer Animal Health Seresto Flea and Tick Collar for Dogs', 2, 1, 57.98, 90, 1, 'Bayer Animal Health Seresto Flea and Tick Collar for Dogs, 8-Month Tick and Flea Control for Dogs.', '22.jfif');
-INSERT INTO `product` VALUES (23, 'VetriScience Laboratories GlycoFlex Joint Support for Dogs', 2, 0, 39.00, 100, 1, 'VetriScience Laboratories GlycoFlex 3, Hip and Joint Supplement for Dogs, 120 Bite Sized Chews.', '23.jfif');
-INSERT INTO `product` VALUES (24, 'PetHonesty 10-for-1 Dog Multivitamin', 2, 1, 25.99, 120, 1, 'PetHonesty 10-for-1 Dog Multivitamin with Glucosamine - Essential Dog Vitamins with Glucosamine Chondroitin, Probiotics and Omega Fish Oil for Dogs Overall Health.', '24.jfif');
-INSERT INTO `product` VALUES (25, 'Earthbath All Natural Pet Shampoo', 3, 1, 14.99, 100, 1, 'Earthbath All Natural Pet Shampoo - Oatmeal & Aloe, Fragrance Free, 16 oz.', '25.jfif');
+INSERT INTO `product` VALUES (1, 'Purina ONE Natural Dry Dog Food', 1, 1, 21.49, 100, 1, 'Purina ONE Natural dry dog food with real chicken and rice for adult dogs.', '1.jpg');
+INSERT INTO `product` VALUES (2, 'Hill\'s Science Diet Dry Dog Food', 1, 1, 32.99, 150, 1, 'Hill\'s Science Diet Adult Sensitive Stomach & Skin Chicken Recipe Dry Dog Food.', '2.jpg');
+INSERT INTO `product` VALUES (3, 'Fancy Feast Gravy Lovers Wet Cat Food', 1, 0, 16.79, 200, 1, 'Fancy Feast Gravy Lovers Wet Cat Food Variety Pack, 3 oz. cans, 24 count.', '3.jpg');
+INSERT INTO `product` VALUES (4, 'Blue Buffalo Life Protection Formula Dry Dog Food', 1, 1, 54.98, 180, 1, 'Blue Buffalo Life Protection Formula Adult Chicken & Brown Rice Recipe Dry Dog Food.', '4.jpg');
+INSERT INTO `product` VALUES (5, 'Wellness CORE Grain-Free Dry Cat Food', 1, 0, 40.89, 120, 1, 'Wellness CORE Grain-Free Original Turkey & Chicken Recipe Dry Cat Food.', '5.jpg');
+INSERT INTO `product` VALUES (6, 'Frontline Plus Flea & Tick Treatment for Dogs', 2, 1, 45.99, 250, 1, 'Frontline Plus Flea and Tick Treatment for dogs (45-88 lbs) - 3 Doses.', '6.jpg');
+INSERT INTO `product` VALUES (7, 'Nutramax Cosequin Joint Health Supplement', 2, 1, 34.95, 100, 1, 'Nutramax Cosequin Maximum Strength Joint Health Supplement for Dogs, 250 Count.', '7.jpg');
+INSERT INTO `product` VALUES (8, 'Zesty Paws Allergy Immune Supplement for Dogs', 2, 0, 25.96, 300, 1, 'Zesty Paws Allergy Immune Supplement for Dogs - with Omega 3 Wild Alaskan Salmon Fish Oil & EpiCor + Digestive Prebiotics & Probiotics.', '8.jpg');
+INSERT INTO `product` VALUES (9, 'Burt\'s Bees for Dogs Natural Itch Soothing Shampoo', 3, 0, 7.49, 200, 1, 'Burt\'s Bees for Dogs Natural Itch Soothing Shampoo with Honeysuckle.', '9.jpg');
+INSERT INTO `product` VALUES (10, 'FURminator deShedding Tool for Dogs', 3, 1, 29.95, 100, 1, 'FURminator deShedding Tool for Dogs, Large, Long Hair.', '10.jpg');
+INSERT INTO `product` VALUES (11, 'KONG Classic Dog Toy', 4, 1, 7.99, 500, 1, 'KONG Classic Dog Toy, Durable Natural Rubber- Fun to Chew, Chase and Fetch.', '11.jpg');
+INSERT INTO `product` VALUES (12, 'Petstages Tower of Tracks Cat Toy', 4, 1, 24.99, 80, 1, 'Petstages Tower of Tracks Cat Toy - 3 Level of Interactive Play - Circle Track with Moving Balls Satisfies Kitty\'s Hunting, Chasing and Exercising Needs.', '12.jpg');
+INSERT INTO `product` VALUES (13, 'Benebone Real Flavor Wishbone Dog Chew Toy', 4, 0, 11.59, 120, 1, 'Benebone Real Flavor Wishbone Dog Chew Toy, Made in USA, Medium, Real Chicken Flavor.', '13.jpg');
+INSERT INTO `product` VALUES (14, 'SmartyKat Skitter Critters Cat Toy', 4, 0, 2.99, 400, 1, 'SmartyKat Skitter Critters Cat Toy, Catnip Mice, 3/pkg.', '14.jpg');
+INSERT INTO `product` VALUES (15, 'AmazonBasics Two-Door Top-Load Pet Kennel', 5, 1, 29.99, 100, 1, 'AmazonBasics Two-Door Top-Load Hard-Sided Pet Travel Carrier, 23-Inch.', '15.jpg');
+INSERT INTO `product` VALUES (16, 'Sherpa Travel Original Deluxe Airline Approved Pet Carrier', 5, 0, 73.16, 50, 1, 'Sherpa Travel Original Deluxe Airline Approved Pet Carrier, Large, Black.', '16.jpg');
+INSERT INTO `product` VALUES (17, 'Furhaven Pet Dog Bed', 6, 1, 37.99, 100, 1, 'Furhaven Pet Dog Bed - Orthopedic Ultra Plush Faux Fur Ergonomic Luxe Lounger Cradle Mattress Contour Pet Bed for Dogs and Cats, Gray, Large.', '17.jpg');
+INSERT INTO `product` VALUES (18, 'MidWest Homes for Pets Deluxe Super Plush Pet Beds', 6, 0, 14.99, 200, 1, 'MidWest Homes for Pets Deluxe Super Plush Pet Beds, Machine Wash & Dryer Friendly, 1-Year Warranty.', '18.jpg');
+INSERT INTO `product` VALUES (19, 'Purina Pro Plan High Protein Dry Dog Food', 1, 1, 38.48, 80, 1, 'Purina Pro Plan High Protein Dry Dog Food, SPORT Performance 30/20 Formula - 37.5 lb. Bag.', '19.jpg');
+INSERT INTO `product` VALUES (20, 'Merrick Grain-Free Dry Dog Food', 1, 0, 59.99, 60, 1, 'Merrick Grain-Free Dry Dog Food Real Texas Beef + Sweet Potato Recipe - 25 lb. Bag.', '20.jpg');
+INSERT INTO `product` VALUES (21, 'Blue Buffalo Wilderness High Protein Dry Cat Food', 1, 1, 36.98, 140, 1, 'Blue Buffalo Wilderness High Protein, Natural Adult Dry Cat Food, Chicken 12-lb.', '21.jpg');
+INSERT INTO `product` VALUES (22, 'Bayer Animal Health Seresto Flea and Tick Collar for Dogs', 2, 1, 57.98, 90, 1, 'Bayer Animal Health Seresto Flea and Tick Collar for Dogs, 8-Month Tick and Flea Control for Dogs.', '22.jpg');
+INSERT INTO `product` VALUES (23, 'VetriScience Laboratories GlycoFlex Joint Support for Dogs', 2, 0, 39.00, 100, 1, 'VetriScience Laboratories GlycoFlex 3, Hip and Joint Supplement for Dogs, 120 Bite Sized Chews.', '23.jpg');
+INSERT INTO `product` VALUES (24, 'PetHonesty 10-for-1 Dog Multivitamin', 2, 1, 25.99, 120, 1, 'PetHonesty 10-for-1 Dog Multivitamin with Glucosamine - Essential Dog Vitamins with Glucosamine Chondroitin, Probiotics and Omega Fish Oil for Dogs Overall Health.', '24.jpg');
+INSERT INTO `product` VALUES (25, 'Earthbath All Natural Pet Shampoo', 3, 1, 14.99, 100, 1, 'Earthbath All Natural Pet Shampoo - Oatmeal & Aloe, Fragrance Free, 16 oz.', '25.jpg');
 
 -- ----------------------------
 -- Table structure for user
