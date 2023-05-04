@@ -27,7 +27,6 @@
 		<img src="images/<?php session_start(); echo $_SESSION['admin_avatar']; ?>" alt="Admin Avatar" class="avatar" id="sidebar-avatar" style="width:50px; height: 50px; position: relative;">
         <?php echo $_SESSION['username']; ?>
 		</h1>
-	
 	</div>
         <div>
         <ul class="mdui-list">
