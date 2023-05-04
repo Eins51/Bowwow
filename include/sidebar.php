@@ -7,23 +7,23 @@
     </style>
 <div class="sidebar">
 <body class="mdui-drawer-body-left mdui-theme-primary-white mdui-theme-accent-blue">
-    <!-- 顶部框 -->
+    <!-- Header -->
         <div class="mdui-toolbar mdui-color-theme" style="color:#D8CCC4;" id="header">
             <a class="mdui-btn mdui-btn-icon">
                 <i class="mdui-icon material-icons" id="menu" onclick="toggleSidebar()">format_indent_decrease</i>
             </a>
 
-            <div class="mdui-toolbar-spacer"></div> <!--会将该元素两边的内容推向两侧。-->
+            <div class="mdui-toolbar-spacer"></div> <!--Will push the content on both sides of the element towards both sides-->
             <div class="mdui-chip" style="line-height:normal">
 			<button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="window.location=`index.php`;">
 				Log out
 			</button>
             </div>
         </div>
-    <!--侧边栏-->
+    <!--Sidebar-->
     <div class="mdui-drawer" id="siderbar" style="background-color: #D8CCC4;">
 	<div>
-		<h1 style="text-transform:capitalize; font-size: 22; color: gray" ><!--暂时写死，看情况是否需要连接数据库-->
+		<h1 style="text-transform:capitalize; font-size: 22; color: gray" >
 		<img src="images/<?php echo $_SESSION['admin_avatar']; ?>" alt="Admin Avatar" class="avatar" id="sidebar-avatar" style="width:50px; height: 50px; position: relative;"> 
         <?php echo $_SESSION['username']; ?>
 		</h1>
@@ -72,8 +72,6 @@
         <script>
         function toggleSidebar() {
             document.getElementById("siderbar").classList.toggle("mdui-drawer-close");
-  
-  // 更改顶部样式
             var topbar = document.getElementById("header");
             if (topbar.style.width === "100%") {
                 topbar.style.width = "auto";
