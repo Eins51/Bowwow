@@ -1,6 +1,5 @@
 <div class="span3">
     <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css"/>
-    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
     <style>
         .mdui-toolbar {
             border-bottom: 1px solid #ccc;
@@ -9,15 +8,12 @@
 <div class="sidebar">
 <body class="mdui-drawer-body-left mdui-theme-primary-white mdui-theme-accent-blue">
     <!-- 顶部框 -->
-        <div class="mdui-toolbar mdui-color-theme" style="color:#D8CCC4;" id="side">
+        <div class="mdui-toolbar mdui-color-theme" style="color:#D8CCC4;" id="header">
             <a class="mdui-btn mdui-btn-icon">
-                <i class="mdui-icon material-icons">format_indent_decrease</i>
+                <i class="mdui-icon material-icons" id="menu" onclick="toggleSidebar()">format_indent_decrease</i>
             </a>
 
             <div class="mdui-toolbar-spacer"></div> <!--会将该元素两边的内容推向两侧。-->
-            <a class="mdui-btn mdui-btn-icon" >
-                <i class="mdui-icon material-icons"onclick="window.location=`profile.php`;">account_circle</i>
-            </a>
             <div class="mdui-chip" style="line-height:normal">
 			<button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="window.location=`index.php`;">
 				Log out
@@ -65,3 +61,24 @@
         <img src="./images/sidebar_dog.png" alt="" id="dog" style="position:absolute; bottom: 0">
 		</div>
 		</div>
+        <style>
+        ..mdui-toolbar-fixed{
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+        </style>
+        <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+        <script>
+        function toggleSidebar() {
+            document.getElementById("siderbar").classList.toggle("mdui-drawer-close");
+  
+  // 更改顶部样式
+            var topbar = document.getElementById("header");
+            if (topbar.style.width === "100%") {
+                topbar.style.width = "auto";
+            } else {
+                topbar.style.width = "100%";
+            }
+        }
+        </script>
