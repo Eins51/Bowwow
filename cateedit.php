@@ -29,7 +29,7 @@ $row = $result->fetch_assoc();
         </h1>
         <h2 style="font-style: italic;">Edit the category information</h2>
         <?php
-        echo '<form action="editCategory.php?id='.$id.'" method="post" target="myiframe" id="submission"></form>'
+        echo '<form action="editCategory.php?id='.$id.'" method="post" target="myiframe" id="submission" enctype="multipart/form-data"></form>'
         ?>
 
                 <div class="mdui-col-xs-3" style="font-weight: 400;" >Category Name:</div>
@@ -47,7 +47,7 @@ $row = $result->fetch_assoc();
                 <div class="mdui-col-xs-9">
                 <!-- 单选框 -->
                     <?php
-                    $parh = 'category_img/'.$row["image_path"];
+                    $parh = 'images/category_img/'.$row["image_path"];
                     echo'<img src="'.$parh.'" alt="" id="dog" style="width:100px; height: 100px;"><i>Current icon</i><br/>';
                     ?>
 

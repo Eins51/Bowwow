@@ -25,7 +25,7 @@ if (mysqli_num_rows($rows) == 0)
         $id = $row["id"];
         if (isset($img)){
 
-            $path = "category_img/".$id.".svg";
+            $path = "./images/category_img/".$id.".svg";
             move_uploaded_file($temp, $path);
             $imgname = $id.".svg";
             $addimg =  "UPDATE category SET image_path ='$imgname' WHERE id = {$id}";

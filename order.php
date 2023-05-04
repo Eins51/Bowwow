@@ -173,7 +173,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<td width="15%">'.$order['shipped_time'].'</td>';
         echo '<td width="15%">'.$order['completed_time'].'</td>';       
         echo '<td width="15%"><a href="cateedit.php?id='.$order['id'].'">Edit</a> ';
-        echo '<a href="Delete.php?action=delete&id='.$order['id'].'">Delete</a></td>';
+        echo '<a href="Delete.php?cate=order&id='.$order['id'].'">Delete</a></td>';
         echo "</tr>";
         echo "</table>";
       }

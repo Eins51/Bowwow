@@ -10,8 +10,8 @@ $cate = $_POST["catesele"];
 $qty = $_POST["qty"];
 $price = $_POST["price"];
 $status = $_POST["status"];
-//$img = $_FILES["up"];
-//$temp = $img['tmp_name'];
+$img = $_FILES["up"];
+$temp = $img['tmp_name'];
 //if (!isset($img)){
 // $err = $_FILES["up"]["error"];
 #echo "<script>alert('$err');location.href='".$_SERVER["HTTP_REFERER"]."';</script>";
@@ -25,10 +25,15 @@ if ($proName == ""){
     mysqli_query($conn, $add);
     $id = mysqli_insert_id($conn);
     $path = "category_img/".$id.".jpg";
-    //move_uploaded_file($temp, $path);
-    $imgname = $id.".jpg";
-    $addimg =  "UPDATE product SET image_path ='$imgname' WHERE id = {$id}";
-    mysqli_query($conn, $addimg);
+    if (isset($img)){
+        $imgname = $id.".jpg";
+        $path = "./images/product_img/".$imgname;
+        move_uploaded_file($temp, $path);
+
+        $addimg =  "UPDATE product SET image_path ='$imgname' WHERE id = {$id}";
+        mysqli_query($conn, $addimg);
+    }
+
     echo "<script>alert('Add product Successfully');location.href='product.php';</script>";
 
 }

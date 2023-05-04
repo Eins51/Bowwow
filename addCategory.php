@@ -30,7 +30,7 @@
         </h1>
         <h2 style="font-style: italic;">Please enter category information</h2>
 
-        <form action="addedCategory.php" method="post" id="submit"></form>
+        <form action="addedCategory.php" method="post" id="submit" enctype="multipart/form-data"></form>
                 <div class="mdui-col-xs-3" style="font-weight: 400;">Category Name:</div>
 
                 <div class="mdui-col-xs-9">

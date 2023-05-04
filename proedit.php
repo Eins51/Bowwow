@@ -26,7 +26,7 @@ $row = $result->fetch_assoc();
             <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-blue-accent" id="return">Return</button>
         </h1>
         <?php
-        echo '<form action="editProduct.php?id='.$id.'" method="post" id="submission"></form>'
+        echo '<form action="editProduct.php?id='.$id.'" method="post" id="submission" enctype="multipart/form-data"></form>'
         ?>
         <h2 style="font-style: italic;">Edit the product information</h2>                
                 <div class="mdui-col-xs-3" style="font-weight: 400;">Product Name:</div>
@@ -56,7 +56,7 @@ $row = $result->fetch_assoc();
                 <div class="mdui-col-xs-9">
                     <!-- 单选框 -->
                     <?php
-                    $parh = 'product_img/'.$row["id"].'.jpg';
+                    $parh = 'images/product_img/'.$row["id"].'.jpg';
                     echo'<img src="'.$parh.'" alt="" id="dog" style="width:100px; height: 100px;"><i>Current icon</i><br/>';
                     ?>
                     <i class="mdui-icon material-icons" style="position:relative; font-size: 100px;" onclick="upload.click()">add_to_photos

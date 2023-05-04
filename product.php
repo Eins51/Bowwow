@@ -1,9 +1,20 @@
 <?php
 // 数据库连接信息
-include ("conn.php");
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "bowwow";
+
+// 创建数据库连接
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// 检查连接是否成功
+if ($conn->connect_error) {
+    die("Failed " . $conn->connect_error);
+}
 
 // 查询所有商品
-$sql = "SELECT * FROM product";
+$sql = "SELECT * FROM product";"SELECT product.*, category.name AS category_name FROM product JOIN category ON product.cate_id = category.id";
 $result = $conn->query($sql);
 
 // 处理表单提交
@@ -32,6 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $sql = "UPDATE products SET name='$name', price='$price', description='$description' WHERE id=$id";
 
+        if ($conn->query($sql) === TRUE) {
+            echo "scuessful";
+        } else {
+            echo "Failed: " . $conn->error;
+        }
     }
 
     // 处理删除商品请求
@@ -40,7 +56,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $sql = "DELETE FROM products WHERE id=$id";
 
-
+        if ($conn->query($sql) === TRUE) {
+            echo "scuessful";
+        } else {
+            echo "Failed: " . $conn->error;
+        }
     }
 }
 
@@ -82,30 +102,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background-color: #D8CCC4;
         }
 
+        h2{
+            margin-left: 5%;
+        }
         
+        div.search_clearfix{
+            float:right;
+            margin-right:calc(5% - 10px);
+        }
     </style>
 </head>
 
 <body>
 <?php include 'include/sidebar.php'; ?>
 
-
     
 <div class="mdui-drawer-body-left" id="body" >
 
   <!--主题-->
-  <h1 >Product Mangement</h1>
-  <!-- 显示已有类别 -->
-  <h2></h2>
+  <h2>Product List</h2>
 
   <!-- SEARCHING -->
 
   <div class="margin" id="page_style">
     <div class="operation clearfix">
     
-    <span class="submenu"><a href="proadd.php" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-amber-100" title="Add Product"><i class="fa  fa-edit"></i>&nbsp;Add Product</a></span>
-    <div class="search  clearfix">
-     <label class="label_name">Product Searching：</label><input name="" type="text"  class="form-control col-xs-6"/><button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-amber-100" onclick=""  type="button"><i class="fa  fa-search"></i>&nbsp;Search</button>
+    <span class="submenu"><a href="proadd.php" style ="margin-left:5%;"class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-amber-100" title="Add Product"><i class="fa  fa-edit"></i>&nbsp;Add Product</a></span>
+    <div class="search_clearfix">
+     <label class="label_name">Product Searching：</label><input name="" type="text"  class="form-control col-xs-6"/><button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-amber-100" onclick=""  type="button" ><i class="fa  fa-search"></i>&nbsp;Search</button>
      
     </div>
     </div>
@@ -132,14 +156,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           echo "<tr>";
           echo '<td width="5%">'.'<label>'.'<input type="checkbox" class="ace"><span class="lbl">'.'</span>'.'</label>'.'</td>';
           echo '<td width="10%">'.$product['id'].'</td>';
-          echo '<td width="10%"><img src="../images/category_img/'.$product['image_path'].'"alt="'.$product['image_path'].'"width="100px"height="100px"></td>';
+          echo '<td width="10%"><img src="./images/product_img/'.$product['id'].'.jpg"alt="'.$product['image_path'].'"width="100px"height="100px"></td>';
           echo '<td width="15%">'.$product['name'].'</td>';
           echo '<td width="10%">'.$product['cate_id'].'</td>';
-          echo '<td width="5%">'.$product['is_hot'].'</td>';
+          
+          
+         echo '<td width="5%">' . ($product['is_hot'] == 0 ? 'No' : ($product['is_hot'] == 1 ? 'Yes' : '')) . '</td>';
+
           echo '<td width="15%">'."$".$product['price'].'</td>';
           echo '<td width="10%">'.$product['stock_qty'].'</td>';    
-          echo '<td width="30%"><a href="proedit.php?id='.$product  ['id'].'">Edit</a> ';
-          echo '<a href="Delete.php?action=delete&id='.$product['id'].'">Delete</a></td>';
+          echo '<td width="30%"><a href="proedit.php?id='.$product['id'].'">Edit</a> ';
+          echo '<a href="Delete.php?cate=product&id='.$product['id'].'">Delete</a></td>';
           echo "</tr>";
           echo "</table>";
         }
@@ -158,4 +185,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 
-</html>
+    </html>
