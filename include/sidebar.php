@@ -24,7 +24,7 @@
     <div class="mdui-drawer" id="siderbar" style="background-color: #D8CCC4;">
 	<div>
 		<h1 style="text-transform:capitalize; font-size: 22; color: gray" ><!--暂时写死，看情况是否需要连接数据库-->
-		<img src="images/<?php echo $_SESSION['admin_avatar']; ?>" alt="Admin Avatar" class="avatar" id="sidebar-avatar" style="width:50px; height: 50px;"> 
+		<img src="images/<?php echo $_SESSION['admin_avatar']; ?>" alt="Admin Avatar" class="avatar" id="sidebar-avatar" style="width:50px; height: 50px; position: relative;"> 
         <?php echo $_SESSION['username']; ?>
 		</h1>
 	
