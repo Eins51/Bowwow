@@ -2,7 +2,12 @@
 session_start();
 require_once 'include/config.php';
 
-$ID = 1;
+$uid = $_GET['ID'];
+if (!empty($uid)) {
+    $ID = $uid;
+} else {
+    $ID = 1;
+}
 $sql = "select * from user where id=$ID";
 $result = mysqli_query($con, $sql);
 while ($row = mysqli_fetch_array($result)) {
@@ -23,6 +28,12 @@ $result1 = mysqli_query($con, $sql1);
 $sql2 = "select * from address where user_id=$ID";
 $result2 = mysqli_query($con, $sql2);
 
+$sql3 = "select * from `order` where user_id=$ID";
+$result3 = mysqli_query($con, $sql3);
+
+$sql11 = "select * from `coupon_detail` where user_id=$ID";
+$result11 = mysqli_query($con, $sql11);
+
 include 'include/sidebar.php';
 
 //a safe method to recieve post data
@@ -36,6 +47,8 @@ $petid = mypost('changep');
 $petid1 = mypost('deletep');
 $addressid = mypost('changea');
 $addressid1 = mypost('deletea');
+$orderid = mypost('deleteo');
+$couponidu = mypost('deletecu');
 
 //receive query parameters.
 if (!empty(mypost('username1'))) {
@@ -49,6 +62,7 @@ if (!empty(mypost('phoneu'))) {
 } else {
     $phoneu = $phone;
 }
+$is_memberu = mypost('is_memberu');
 if (!empty(mypost('emailu'))) {
     $emailu = mypost('emailu');
 } else {
@@ -93,43 +107,52 @@ $districtc = mypost('districtc');
 $detailc = mypost('detailc');
 $postal_codec = mypost('postal_codec');
 
-
 //add the received data to database
 if (isset($_POST['add'])) {
     $sqlp = "INSERT INTO `pet` (`id`, `name`,`gender`,`breed`,`size`,`age`,`birthday`,`user_id`) VALUES (NULL, '" . $petname1 . "','" . $genderp . "','" . $breedp . "','" . $sizep . "', '" . $agep . "','" . $birthdayp . "','" . $ID . "')";
     $query = mysqli_query($con, $sqlp);
-    echo "<script language=\"javascript\">location.href='user_information.php';</script>";
+    echo "<script language='javascript'>location.href='user_information.php?ID=" . $ID . "';</script>";
 }
 if (isset($_POST['add1'])) {
     $sqla = "INSERT INTO `address` (`id`, `user_id`, `is_default`, `country`, `province`, `city`, `district`, `detail`, `postal_code`) VALUES (NULL, '" . $ID . "','" . $is_defaulta . "','" . $countrya . "','" . $provincea . "', '" . $citya . "','" . $districta . "','" . $detaila . "','" . $postal_codea . "')";
     $query = mysqli_query($con, $sqla);
-    echo "<script language=\"javascript\">location.href='user_information.php';</script>";
+    echo "<script language='javascript'>location.href='user_information.php?ID=" . $ID . "';</script>";
 }
 
 if (isset($_POST['changeu'])) {
     $sqlu = "UPDATE `user` SET `username` = '" . $username1 . "', `gender` = '" . $genderu . "', `phone` = '" . $phoneu . "', `email` = '" . $emailu . "', `is_member` = '" . $is_memberu . "', `payment` = '" . $paymentu . "', `image_path` = '" . $image_pathu . "' WHERE `user`.`id` = $ID";
     $query = mysqli_query($con, $sqlu);
-    echo "<script language=\"javascript\">location.href='user_information.php';</script>";
+    echo "<script language='javascript'>location.href='user_information.php?ID=" . $ID . "';</script>";
 }
 if (isset($_POST['changep'])) {
     $sqlc = "UPDATE `pet` SET `name` = '" . $petnamec . "', `gender` = '" . $genderc . "', `breed` = '" . $breedc . "', `size` = '" . $sizec . "', `age` = '" . $agec . "', `birthday` = '" . $birthdayc . "' WHERE `pet`.`id` = $petid";
     $query = mysqli_query($con, $sqlc);
-    echo "<script language=\"javascript\">location.href='user_information.php';</script>";
+    echo "<script language='javascript'>location.href='user_information.php?ID=" . $ID . "';</script>";
 }
 if (isset($_POST['changea'])) {
     $sqld = "UPDATE `address` SET `is_default` = '" . $is_defaultc . "', `country` = '" . $countryc . "', `province` = '" . $provincec . "', `city` = '" . $cityc . "', `district` = '" . $districtc . "', `detail` = '" . $detailc . "', `postal_code` = '" . $postal_codec . "' WHERE `address`.`id` = $addressid";
     $query = mysqli_query($con, $sqld);
-    echo "<script language=\"javascript\">location.href='user_information.php';</script>";
+    echo "<script language='javascript'>location.href='user_information.php?ID=" . $ID . "';</script>";
 }
 if (isset($_POST['deletep'])) {
     $sqle = "DELETE FROM `pet` WHERE `pet`.`id` = $petid1";
     $query = mysqli_query($con, $sqle);
-    echo "<script language=\"javascript\">location.href='user_information.php';</script>";
+    echo "<script language='javascript'>location.href='user_information.php?ID=" . $ID . "';</script>";
 }
 if (isset($_POST['deletea'])) {
     $sqlf = "DELETE FROM `address` WHERE `address`.`id` = $addressid1";
     $query = mysqli_query($con, $sqlf);
-    echo "<script language=\"javascript\">location.href='user_information.php';</script>";
+    echo "<script language='javascript'>location.href='user_information.php?ID=" . $ID . "';</script>";
+}
+if (isset($_POST['deleteo'])) {
+    $sqlf = "DELETE FROM `order` WHERE `order`.`id` = $orderid";
+    $query = mysqli_query($con, $sqlf);
+    echo "<script language='javascript'>location.href='user_information.php?ID=" . $ID . "';</script>";
+}
+if (isset($_POST['deletecu'])) {
+    $sqlf = "DELETE FROM `coupon_detail` WHERE `coupon_detail`.`id` = $couponidu";
+    $query = mysqli_query($con, $sqlf);
+    echo "<script language='javascript'>location.href='user_information.php?ID=" . $ID . "';</script>";
 }
 ?>
 
@@ -346,7 +369,10 @@ if (isset($_POST['deletea'])) {
                                             <a class="nav-link" data-toggle="tab" href="#Address" role="tab">Address</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#" role="tab">Order History</a>
+                                            <a class="nav-link" data-toggle="tab" href="#HOrder" role="tab">History Order</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#Coupon" role="tab">Coupon</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
@@ -746,7 +772,152 @@ if (isset($_POST['deletea'])) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Address Tab End -->
+                                        <!-- HOrder Tab Start -->
+                                        <div class="tab-pane fade" id="HOrder" role="tabpanel">
+                                            <div class="pd-20 profile-task-wrap">
+                                                <div class="container pd-0">
+                                                    <!-- Open  start -->
+                                                    <div class="task-title row align-items-center">
+                                                        <div class="col-md-8 col-sm-12">
+                                                            <h5>History Order List</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="pd-20">
+                                                    <div class="profile-timeline">
+                                                        <div class="profile-timeline-list">
+                                                            <ul>
+                                                                <form role="form" action="" method="post">
+                                                                    <?php
+                                                                    while ($row3 = mysqli_fetch_array($result3)) {
+                                                                        echo "<li>";
+                                                                        echo '<div class="task-type"><b>Amount:$' . $row3["amount"] . '</b></div>';
+                                                                        $cid = $row3["coupon_id"];
+                                                                        if (!empty($cid)) {
+                                                                            $sql4 = "select name from `coupon` where id=$cid";
+                                                                            $row5 = mysqli_fetch_array(mysqli_query($con, $sql4));
+                                                                            echo '<div class="task-type"><b>Coupon:</b></div>';
+                                                                        }
+                                                                        $aid = $row3["address_id"];
+                                                                        $sql5 = "select * from `address` where id=$aid";
+                                                                        $row6 = mysqli_fetch_array(mysqli_query($con, $sql5));
+                                                                        echo '<div class="task-type"><b>Address:</b></div>';
+                                                                        echo $row6["country"] . ' ' .  $row6["province"] . ' ' .  $row6["city"] . ' ' .  $row6["district"] . ' ' .  $row6["detail"] . ' ' .  $row6["postal_code"];
+                                                                        echo '<div class="task-type"><b>Payment:</b></div>';
+                                                                        switch ($row3["payment"]) {
+                                                                            case 0:
+                                                                                echo "PayPal";
+                                                                                break;
+                                                                            case 1:
+                                                                                echo "Credit Card";
+                                                                                break;
+                                                                            case 2:
+                                                                                echo "Alipay";
+                                                                                break;
+                                                                            default:
+                                                                                echo "Others";
+                                                                        }
+                                                                        echo "<br/>";
+                                                                        $orderid = $row3['id'];
+                                                                        echo '<div style="float:right;"><button type="submit" class="btn btn-primary" id="add" name="deleteo" value="' . $orderid . '"><span aria-hidden="true">&times;</span>
+                                                                        </button></div>';
+                                                                        echo '<div class="task-type"><b>Status:</b></div>';
+                                                                        switch ($row3["status"]) {
+                                                                            case 0:
+                                                                                echo "Unpaid";
+                                                                                break;
+                                                                            case 1:
+                                                                                echo "Unshipped";
+                                                                                break;
+                                                                            case 2:
+                                                                                echo "Shippped";
+                                                                                break;
+                                                                            default:
+                                                                                echo "Canceled";
+                                                                        }
+                                                                        echo "<br/>";
+                                                                        $oid = $row3["id"];
+                                                                        $sql01 = "select * from `order_detail` where order_id=$oid";
+                                                                        $result01 = mysqli_query($con, $sql01);
+                                                                        while ($row01 = mysqli_fetch_array($result01)) {
+                                                                            echo '<div class="task-type"><b>Item:</b></div>';
+                                                                            $iid = $row01['item_id'];
+                                                                            $sql02 = "select * from `product` where id=$iid";
+                                                                            $row02 = mysqli_fetch_array(mysqli_query($con, $sql02));
+                                                                            echo $row02['name'] . ' x ' . $row01['item_num'];;
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                </form>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--History Order End-->
+                                        <!--Coupon Start-->
+                                        <div class="tab-pane fade" id="Coupon" role="tabpanel">
+                                            <div class="pd-20 profile-task-wrap">
+                                                <div class="container pd-0">
+                                                    <!-- Open  start -->
+                                                    <div class="task-title row align-items-center">
+                                                        <div class="col-md-8 col-sm-12">
+                                                            <h5>Coupon List</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="pd-20">
+                                                    <div class="profile-timeline">
+                                                        <div class="profile-timeline-list">
+                                                            <ul>
+                                                                <form role="form" action="" method="post">
+                                                                    <?php
+                                                                    while ($row11 = mysqli_fetch_array($result11)) {
+                                                                        echo "<li>";
+                                                                        $id11 = $row11["coupon_id"];
+                                                                        $sql12 = "select * from `coupon` where id=$id11";
+                                                                        $row12 = mysqli_fetch_array(mysqli_query($con, $sql12));
+                                                                        echo '<div class="task-type"><b>Coupon:</b></div>';
+                                                                        echo $row12["name"];
+                                                                        echo '<div class="task-type"><b>Amount:</b></div>';
+                                                                        echo $row11["coupon_num"];
+                                                                        $couponidu = $row11['id'];
+                                                                        echo '<div style="float:right;"><button type="submit" class="btn btn-primary" id="add" name="deletecu" value="' . $couponidu . '"><span aria-hidden="true">&times;</span>
+                                                                        </button></div>';
+                                                                        echo '<div class="task-type"><b>Category:</b></div>';
+                                                                        switch ($row12["category"]) {
+                                                                            case 0:
+                                                                                echo "Discount Coupon";
+                                                                                break;
+                                                                            case 1:
+                                                                                echo "Voucher";
+                                                                                break;
+                                                                            case 2:
+                                                                                echo "Cash Coupon";
+                                                                                break;
+                                                                            default:
+                                                                                echo "Others";
+                                                                        }
+                                                                        echo "<br/>";
+
+                                                                        echo '<div class="task-type"><b>Value:</b></div>';
+                                                                        echo $row12["value"];
+                                                                        echo '<div class="task-type"><b>Time:</b></div>';
+                                                                        echo $row12["start_time"] . ' to ' . $row12["end_time"];
+                                                                        echo '<div class="task-type"><b>Description:</b></div>';
+                                                                        echo $row12["description"];
+                                                                    }
+                                                                    ?>
+                                                                </form>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -768,7 +939,7 @@ if (isset($_POST['deletea'])) {
     <!-- js -->
     <script src="assets/js/core.js"></script>
     <script src="assets/js/script.min.js"></script>
-        <script>
+    <script>
         window.addEventListener('DOMContentLoaded', function() {
             var image = document.getElementById('image');
             var cropBoxData;
