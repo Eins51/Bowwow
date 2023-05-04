@@ -13,6 +13,8 @@ $status = $_POST["status"];
 $img = $_FILES["up"];
 $temp = $img["tmp_name"];
 $id = $_GET["id"];
+$proName = str_replace('\'', '`', $proName);
+$prodesc = str_replace('\'', '`', $prodesc);
 if ($proName == "") {
     echo "<script>alert('Warning:Name cannot be empty!');location.href='" . $_SERVER["HTTP_REFERER"] . "';</script>";
 } else {

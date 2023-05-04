@@ -5,6 +5,8 @@ $id = $_GET["id"];
 $sql = "SELECT * FROM product where id = ".$id;
 $result = mysqli_query($conn, $sql);
 $row = $result->fetch_assoc();
+$row["name"] = str_replace('\'', '`', $row["name"]);
+$row["description"] = str_replace('\'', '`', $row["description"]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
