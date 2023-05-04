@@ -8,10 +8,7 @@ $catedesc = $_POST["catedesc"];
 $catesele = $_POST["catesele"];
 $img = $_FILES["up"];
 $temp = $img['tmp_name'];
-if (!isset($img)){
-    $err = $_FILES["up"]["error"];
-    echo "<script>alert('$err');location.href='".$_SERVER["HTTP_REFERER"]."';</script>";
-}
+
 //echo $catesele;
 if ($cateName == ""){
     echo "<script>alert('Warning:Name cannot be empty!');location.href='".$_SERVER["HTTP_REFERER"]."';</script>";
@@ -26,11 +23,15 @@ if (mysqli_num_rows($rows) == 0)
         $rows = mysqli_query($conn, $checkExist);
         $row = mysqli_fetch_assoc($rows);
         $id = $row["id"];
-        $path = "category_img/".$id.".svg";
-        move_uploaded_file($temp, $path);
-        $imgname = $id.".svg";
-        $addimg =  "UPDATE category SET image_path ='$imgname' WHERE id = {$id}";
-        mysqli_query($conn, $addimg);
+        if (isset($img)){
+
+            $path = "category_img/".$id.".svg";
+            move_uploaded_file($temp, $path);
+            $imgname = $id.".svg";
+            $addimg =  "UPDATE category SET image_path ='$imgname' WHERE id = {$id}";
+            mysqli_query($conn, $addimg);
+        }
+
         echo "<script>alert('Add category Successfully');location.href='category.php';</script>";
     }
     else{echo "<script>alert('Error happaned');location.href='".$_SERVER["HTTP_REFERER"]."';</script>";}

@@ -24,26 +24,26 @@
     <div class="mdui-drawer" id="siderbar" style="background-color: #D8CCC4;">
 	<div>
 		<h1 style="text-transform:capitalize; font-size: 22; color: gray" >
-		<img src="images/<?php echo $_SESSION['admin_avatar']; ?>" alt="Admin Avatar" class="avatar" id="sidebar-avatar" style="width:50px; height: 50px; position: relative;"> 
+		<img src="images/<?php session_start(); echo $_SESSION['admin_avatar']; ?>" alt="Admin Avatar" class="avatar" id="sidebar-avatar" style="width:50px; height: 50px; position: relative;">
         <?php echo $_SESSION['username']; ?>
 		</h1>
 	
 	</div>
         <div>
         <ul class="mdui-list">
-            <li class="mdui-list-item mdui-ripple" onclick="window.location=`./profile.php`;" style="color: white;">
+            <li class="mdui-list-item mdui-ripple" onclick="window.location=`profile.php`;" style="color: white;">
                 <i class="mdui-icon material-icons">account_circle</i>
                 <div class="mdui-list-item-content">&nbsp My Profile</div>
             </li>
-        <li class="mdui-list-item mdui-ripple" onclick="window.location=`product.php`;" style="color: white;">
+        <li class="mdui-list-item mdui-ripple" onclick="window.location=`category.php`;" style="color: white;">
             <i class="mdui-icon material-icons">local_mall</i>
             <div class="mdui-list-item-content">&nbsp Category Management</div>
         </li>
-        <li class="mdui-list-item mdui-ripple " onclick="window.location=`category.php`;" style="color: white;">
+        <li class="mdui-list-item mdui-ripple " onclick="window.location=`product.php`;" style="color: white;">
             <i class="mdui-icon material-icons">apps</i>
             <div class="mdui-list-item-content" >&nbsp Product Management</div>
         </li>
-        <li class="mdui-list-item mdui-ripple " onclick="window.location=`user.php`;" style="color: white;">
+        <li class="mdui-list-item mdui-ripple " onclick="window.location=`user_information.php`;" style="color: white;">
             <i class="mdui-icon material-icons">person</i>
             <div class="mdui-list-item-content">&nbsp User Management</div>
         </li>

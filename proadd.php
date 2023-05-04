@@ -30,50 +30,7 @@ include ("conn.php");
     <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
     <title>CAN302 Store Admin| Product</title>
 </head>
-<body class="mdui-drawer-body-left mdui-theme-primary-white mdui-theme-accent-blue">
-<!-- 顶部框 -->
-<div class="mdui-toolbar mdui-color-theme" style="color:burlywood;" id="side">
-    <a class="mdui-btn mdui-btn-icon">
-        <i class="mdui-icon material-icons">format_indent_decrease</i>
-    </a>
-
-    <div class="mdui-toolbar-spacer"></div> <!--会将该元素两边的内容推向两侧。-->
-    <a class="mdui-btn mdui-btn-icon" >
-        <i class="mdui-icon material-icons"onclick="window.location=`myprofile.php`;">account_circle</i>
-    </a>
-    <div class="mdui-chip" style="line-height:normal">
-        <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-burlywood-accent" style="position: right;" onclick="window.location=`login.php`;">Log out</button>
-    </div>
-</div>
-<!--侧边栏-->
-<div class="mdui-drawer" id="siderbar" style="background-color: burlywood;">
-    <ul class="mdui-list">
-        <li class="mdui-list-item mdui-ripple lefthighlight" onclick="window.location=`myprofile.php`;">
-            <i class="mdui-icon material-icons">person</i>
-            <div class="mdui-list-item-content">&nbsp My Profile</div>
-        </li>
-        <li class="mdui-list-item mdui-ripple lefthighlight" onclick="window.location=`product.php`;">
-            <i class="mdui-icon material-icons">class</i>
-            <div class="mdui-list-item-content">&nbsp Category Management</div>
-        </li>
-        <li class="mdui-list-item mdui-ripple " onclick="window.location=`category.php`;">
-            <i class="mdui-icon material-icons">apps</i>
-            <div class="mdui-list-item-content">&nbsp Product Management</div>
-        </li>
-        <li class="mdui-list-item mdui-ripple " onclick="window.location=`user.php`;">
-            <i class="mdui-icon material-icons">person</i>
-            <div class="mdui-list-item-content">&nbsp User Management</div>
-        </li>
-        <li class="mdui-list-item mdui-ripple " onclick="window.location=`order.php`;">
-            <i class="mdui-icon material-icons">assignment</i>
-            <div class="mdui-list-item-content">&nbsp Order Management</div>
-        </li>
-        <li class="mdui-list-item mdui-ripple " onclick="window.location=`coupon.php`;">
-            <i class="mdui-icon material-icons">card_giftcard</i>
-            <div class="mdui-list-item-content">&nbsp Coupon Management</div>
-        </li>
-    </ul>
-</div>
+<?php include 'include/sidebar.php'; ?>
 <!-- 主内容 -->
 <div class="content" id="content">
     <h1 style="text-transform:capitalize;">Product Management/Add Product

@@ -13,19 +13,19 @@ if ($conn->connect_error) {
     die("Failed " . $conn->connect_error);
 }
 
-// 查询所有商品
-$sql = "SELECT * FROM Order";
+// 查询所有order
+$sql = "SELECT `order`.*, user.username AS user_name FROM `order` LEFT JOIN user ON `order`.user_id = user.id";
 $result = $conn->query($sql);
 
 // 处理表单提交
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 处理添加商品请求
-    if (isset($_POST["add_Order"])) {
+    if (isset($_POST["add_order"])) {
         $name = $_POST["name"];
         $price = $_POST["price"];
         $description = $_POST["description"];
 
-        $sql = "INSERT INTO Order (name, price, description) VALUES ('$name', '$price', '$description')";
+        $sql = "INSERT INTO `order` (name, price, description) VALUES ('$name', '$price', '$description')";
 
         if ($conn->query($sql) === TRUE) {
             echo "scuessful";
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $price = $_POST["price"];
         $description = $_POST["description"];
 
-        $sql = "UPDATE Orders SET name='$name', price='$price', description='$description' WHERE id=$id";
+        $sql = "UPDATE `order` SET name='$name', price='$price', description='$description' WHERE id=$id";
 
         if ($conn->query($sql) === TRUE) {
             echo "scuessful";
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["delete_category"])) {
         $id = $_POST["id"];
 
-        $sql = "DELETE FROM Order WHERE id=$id";
+        $sql = "DELETE FROM `order` WHERE id=$id";
 
         if ($conn->query($sql) === TRUE) {
             echo "scuessful";
@@ -103,122 +103,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         
+        h2{
+            margin-left: 5%;
+        }
+        
+        div.search_clearfix{
+            float:right;
+            margin-right:calc(5% - 10px);
+        }
+        
     </style>
 </head>
 
 <body>
-<div class="span3">
- <!-- 顶部框 -->
-     <div class="mdui-toolbar mdui-color-theme" style="color:#D8CCC4;" id="side">
-            <a class="mdui-btn mdui-btn-icon">
-                <i class="mdui-icon material-icons">format_indent_decrease</i>
-            </a>
-            <div class="mdui-toolbar-spacer"></div> <!--会将该元素两边的内容推向两侧。-->
-            <a class="mdui-btn mdui-btn-icon" >
-                <i class="mdui-icon material-icons"onclick="window.location=`myprofile.php`;">account_circle</i>
-            </a>
-            <div class="mdui-chip" style="line-height:normal">
-			<button class="mdui-btn mdui-btn-raised mdui-ripple" onclick="window.location=`login.php`;">
-				Log out
-			</button>
-            </div>
-     </div>
-    <!--侧边栏-->
-    <div class="mdui-drawer" id="siderbar" style="background-color: #D8CCC4;">
-	<div>
-		<h1 style="text-transform:capitalize; font-size: 22; color: gray" ><!--暂时写死，看情况是否需要连接数据库-->
-		<img src="../images/admin_avatar.png" alt="" id="dog1" style="width:50px; height: 50px;"> Admin_01
-			<i class="mdui-icon material-icons" onclick="window.location=`myprofile.php`;">edit</i>
-		</h1>
-	
-	
-    </div>
-        <div>
-        <ul class="mdui-list">
-            <li class="mdui-list-item mdui-ripple" onclick="window.location=`myprofile.php`;" style="color: white;">
-                <i class="mdui-icon material-icons">account_circle</i>
-                <div class="mdui-list-item-content">&nbsp My Profile</div>
-            </li>
-        <li class="mdui-list-item mdui-ripple" onclick="window.location=`category.php`;" style="color: white;">
-            <i class="mdui-icon material-icons">local_mall</i>
-            <div class="mdui-list-item-content">&nbsp Category Management</div>
-        </li>
-        <li class="mdui-list-item mdui-ripple " onclick="window.location=`product.php`;" style="color: white;">
-            <i class="mdui-icon material-icons">apps</i>
-            <div class="mdui-list-item-content" >&nbsp Product Management</div>
-        </li>
-        <li class="mdui-list-item mdui-ripple " onclick="window.location=`user.php`;" style="color: white;">
-            <i class="mdui-icon material-icons">person</i>
-            <div class="mdui-list-item-content">&nbsp User Management</div>
-        </li>
-        <li class="mdui-list-item mdui-ripple " onclick="window.location=`order.php`;" style="color: white;">
-            <i class="mdui-icon material-icons">assignment</i>
-            <div class="mdui-list-item-content">&nbsp Order Management</div>
-        </li>
-        <li class="mdui-list-item mdui-ripple " onclick="window.location=`coupon.php`;" style="color: white;">
-            <i class="mdui-icon material-icons">card_giftcard</i>
-            <div class="mdui-list-item-content">&nbsp Coupon Management</div>
-        </li>
-        </ul>
-    </div>
-	<div>
-        <img src="../images/sidebar_dog.png" alt="" id="dog" style="position:absolute; bottom: 0">
-		</div>
-</div>
-
+<?php include 'include/sidebar.php'; ?>
 
 
     
 <div class="mdui-drawer-body-left" id="body" >
 
-  <!--主题-->
-  <h1 >Order Mangement</h1>
-  <!-- 显示已有类别 -->
-  <h2></h2>
+   <!--主题-->
+   <h2>Order List</h2>
 
-  <!-- SEARCHING -->
+<!-- SEARCHING -->
 
-  <div class="margin" id="page_style">
-    <div class="operation clearfix">
-    
-    <span class="submenu"><a href="javascript:void(0)" name="add_Order.php" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-amber-100" title="Add Order"><i class="fa  fa-edit"></i>&nbsp;Add Order</a></span>
-    <div class="search  clearfix">
-     <label class="label_name">Order Searching：</label><input name="" type="text"  class="form-control col-xs-6"/><button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-amber-100" onclick=""  type="button"><i class="fa  fa-search"></i>&nbsp;Search</button>
-     
-    </div>
-    </div>
-    <!--列表展示-->
+<div class="margin" id="page_style">
+  <div class="operation clearfix">
+  
+  <span class="submenu">
+  <div class="search_clearfix">
+   <label class="label_name">Order Searching：</label><input name="" type="text"  class="form-control col-xs-6"/><button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-amber-100" onclick=""  type="button" ><i class="fa  fa-search"></i>&nbsp;Search</button>
+   
+  </div>
+  </div>
     <h3>
   <div class="list_Exhibition margin-sx">
   <table class="table table_list table_striped table-bordered center" id="sample-table">
       <tr>
           <th width="5%"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
-          <th width="10%">ID</th>
-          <th width="20%">Total Amount</th>
-          <th width="20%">User ID</th>
-          <th width="20%">Payment</th>
-          <th width="15%">Status</th>
-          <th width="20%">Paid Time</th>
-          <th width="20%">Shipped Time</th>
-          <th width="20%">Completed Time</th>
-          <th width="30%">Operation</th>
+          <th width="5%">ID</th>
+          <th width="5%">Total Amount</th>
+          <th width="10%">User Name</th>
+          <th width="5%">Payment</th>
+          <th width="10%">Status</th>
+          <th width="15%">Paid Time</th>
+          <th width="15%">Shipped Time</th>
+          <th width="15%">Completed Time</th>
+          <th width="15%">Operation</th>
       </tr>
       <?php
-      // 在这里添加您的PHP代码
-  
+      // php code
+     
+      
       while($order=$result->fetch_assoc()){
         echo "<table class='table table_list table_striped table-bordered center'>";
         echo "<tr>";
         echo '<td width="5%">'.'<label>'.'<input type="checkbox" class="ace"><span class="lbl">'.'</span>'.'</label>'.'</td>';
-        echo '<td width="10%">'.$order['id'].'</td>';
-        echo '<td width="20%">'.$order['amount'].'</td>';
-        echo '<td width="15%">'.$order['user_id'].'</td>';
-        echo '<td width="10%">'.$order['payment'].'</td>';
-        echo '<td width="20%">'.$order['status'].'</td>';
-        echo '<td width="15%">'.$order['Pay_time'].'</td>';
+        echo '<td width="5%">'.$order['id'].'</td>';
+
+        echo '<td width="5%">'.$order['amount'].'</td>';
+
+        echo '<td width="10%">'.$order['user_name'].'</td>';
+        
+        echo '<td width="5%">' . ($order['payment'] == 0 ? 'PayPal' : ($order['payment'] == 1 ? 'Credit Card' : ($order['payment'] == 2 ? 'Other' :''))) . '</td>';
+
+        echo '<td width="10%">' . ($order['status'] == 0 ? 'Unpaid' : ($order['status'] == 1 ? 'Unshipped' : ($order['status'] == 2 ? 'Shipped' : ($order['status'] == 3 ? 'Shipped' : ($order['status'] == 4 ? 'Canceled':''))))) . '</td>';
+
+        echo '<td width="15%">'.$order['pay_time'].'</td>';
         echo '<td width="15%">'.$order['shipped_time'].'</td>';
-        echo '<td width="10%">'.$order['completed_time'].'</td>';       
-        echo '<td width="30%"><a href="cateedit.php?id='.$order['id'].'">Edit</a> ';
+        echo '<td width="15%">'.$order['completed_time'].'</td>';       
+        echo '<td width="15%"><a href="cateedit.php?id='.$order['id'].'">Edit</a> ';
         echo '<a href="Delete.php?action=delete&id='.$order['id'].'">Delete</a></td>';
         echo "</tr>";
         echo "</table>";
