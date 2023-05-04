@@ -12,8 +12,6 @@ while ($row = mysqli_fetch_array($result)) {
     $phone = $row["phone"];
     $email = $row["email"];
     $is_member = $row["is_member"];
-    $num_purchase = $row["num_purchase"];
-    $amount = $row["amount"];
     $payment = $row["payment"];
     $last_online = $row["last_online"];
     $image_path = $row["image_path"];
@@ -55,18 +53,6 @@ if (!empty(mypost('emailu'))) {
     $emailu = mypost('emailu');
 } else {
     $emailu = $email;
-}
-
-$is_memberu = mypost('is_memberu');
-if (!empty(mypost('num_purchaseu'))) {
-    $num_purchaseu = mypost('num_purchaseu');
-} else {
-    $num_purchaseu = $num_purchase;
-}
-if (!empty(mypost('amountu'))) {
-    $amountu = mypost('amountu');
-} else {
-    $amountu = $amount;
 }
 $paymentu = mypost('paymentu');
 if (!empty(mypost('image_pathu'))) {
@@ -121,7 +107,7 @@ if (isset($_POST['add1'])) {
 }
 
 if (isset($_POST['changeu'])) {
-    $sqlu = "UPDATE `user` SET `username` = '" . $username1 . "', `gender` = '" . $genderu . "', `phone` = '" . $phoneu . "', `email` = '" . $emailu . "', `is_member` = '" . $is_memberu . "', `num_purchase` = '" . $num_purchaseu . "', `amount` = '" . $amountu . "', `payment` = '" . $paymentu . "', `image_path` = '" . $image_pathu . "' WHERE `user`.`id` = $ID";
+    $sqlu = "UPDATE `user` SET `username` = '" . $username1 . "', `gender` = '" . $genderu . "', `phone` = '" . $phoneu . "', `email` = '" . $emailu . "', `is_member` = '" . $is_memberu . "', `payment` = '" . $paymentu . "', `image_path` = '" . $image_pathu . "' WHERE `user`.`id` = $ID";
     $query = mysqli_query($con, $sqlu);
     echo "<script language=\"javascript\">location.href='user_information.php';</script>";
 }
@@ -172,7 +158,7 @@ if (isset($_POST['deletea'])) {
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
                         <div class="pd-20 card-box height-100-p">
                             <div class="profile-photo">
-                                <?php echo '<img src="' . $image_path . '" alt="" class="avatar-photo">';     ?>
+                                <?php echo '<img src="images/user_avatar/' . $image_path . '" alt="" class="avatar-photo">';     ?>
                             </div>
                             <!-- View Information -->
 
@@ -251,18 +237,6 @@ if (isset($_POST['deletea'])) {
                                         ?>
                                     </li>
                                     <li>
-                                        <span>Purchase Time:</span>
-                                        <?php
-                                        echo $num_purchase;
-                                        ?>
-                                    </li>
-                                    <li>
-                                        <span>Purchase Amount:</span>
-                                        <?php
-                                        echo $amount;
-                                        ?>
-                                    </li>
-                                    <li>
                                         <span>Last Online Time:</span>
                                         <?php
                                         echo $last_online;
@@ -332,22 +306,6 @@ if (isset($_POST['deletea'])) {
                                                         </select>
                                                     </div>
                                                     <div class="form-group row">
-                                                        <label class="col-md-4">Purchase Time</label>
-                                                        <div class="col-md-8">
-                                                            <?php
-                                                            echo  '<input class="form-control" type="text" placeholder="' . $num_purchase . '" id="num" name="num_purchaseu">';
-                                                            ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-md-4">Amount</label>
-                                                        <div class="col-md-8">
-                                                            <?php
-                                                            echo  '<input class="form-control" type="text" placeholder="' . $amount . '" id="amount" name="amountu">';
-                                                            ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
                                                         <label class="col-md-4">Payment:</label>
                                                         <select name="paymentu" id="payment" class="form-control">
                                                             <option value="0" <?php echo $payment == 0 ? 'selected' : ''; ?>>Paypal</option>
@@ -360,7 +318,7 @@ if (isset($_POST['deletea'])) {
                                                         <label class="col-md-4">Image Path</label>
                                                         <div class="col-md-8">
                                                             <?php
-                                                            echo  '<input class="form-control" type="text" placeholder="' . $image_path . '" id="amount" name="image_pathu">';
+                                                            echo  '<input class="form-control" type="text" placeholder="' . $image_path . '" id="image" name="image_pathu">';
                                                             ?>
                                                         </div>
                                                     </div>
@@ -809,7 +767,8 @@ if (isset($_POST['deletea'])) {
     </div>
     <!-- js -->
     <script src="assets/js/core.js"></script>
-    <script>
+    <script src="assets/js/script.min.js"></script>
+        <script>
         window.addEventListener('DOMContentLoaded', function() {
             var image = document.getElementById('image');
             var cropBoxData;
