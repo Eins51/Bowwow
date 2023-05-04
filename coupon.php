@@ -157,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           echo '<td width="10%">'.$coupon['quantity'].'</td>';
           echo '<td width="10%">'.$coupon['start_time'].'</td>';  
           echo '<td width="10%">'.$coupon['end_time'].'</td>';
-          echo '<td width="20%"><a href="Delete.php?cate=cuopon&id='.$coupon['id'].'">Delete</a></td>';
+          echo '<td width="20%"><a href="Delete.php?cate=coupon&id='.$coupon['id'].'">Delete</a></td>';
           echo "</tr>";
           echo "</table>";
         }

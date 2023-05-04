@@ -60,7 +60,7 @@ $row = $result->fetch_assoc();
                     echo'<img src="'.$parh.'" alt="" id="dog" style="width:100px; height: 100px;"><i>Current icon</i><br/>';
                     ?>
                     <i class="mdui-icon material-icons" style="position:relative; font-size: 100px;" onclick="upload.click()">add_to_photos
-                        <input type="file" form="submission" name="up" id="upload" style="display: none;" /></i>
+                        <input type="file" form="submission" name="up" id="upload" style="display: none;" accept="image/jpeg"/></i>
                     <i>Only jpg/png with a maxium size of 500 kb</i>
                     </div>               
                 <div class="mdui-col-xs-3">Is Hot:</div>

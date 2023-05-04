@@ -212,7 +212,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           echo '<td width="15%">' . ($category['status'] == 0 ? 'Activated' : ($category['status'] == 1 ? 'Forbidden' : '')) . '</td>';
 
           echo '<td width="30%"><a href="cateedit.php?id='.$category['id'].'">Edit</a> ';
-          echo '<a href="Delete.php?action=delete&id='.$category['id'].'">Delete</a></td>';
+          echo '<a href="Delete.php?cate=category&id='.$category['id'].'">Delete</a></td>';
           echo "</tr>";
           echo "</table>";
         }

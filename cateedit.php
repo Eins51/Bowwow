@@ -52,7 +52,7 @@ $row = $result->fetch_assoc();
                     ?>
 
                 <i class="mdui-icon material-icons" style="font-size: 100px;" onclick="upload.click()">add_to_photos
-                    <input type="file" name="upload" id="upload" form="submission" style="display: none;" /></i>
+                    <input type="file" name="upload" id="upload" form="submission" style="display: none;" accept="image/svg+xml"/></i>
                 <i>Only jpg/png with a maxium size of 500 kb</i>
                 </div>
 

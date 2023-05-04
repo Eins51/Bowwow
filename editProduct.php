@@ -18,7 +18,7 @@ if ($proName == "") {
 } else {
 
 
-        $edit = "UPDATE category SET name='{$proName}',description='{$prodesc}', status = '{$status}' is_hot = '{$prosele}' price = '{$price}' stock_qty = '{$quan}' cate_id = '{$cate}' WHERE id = {$id}";
+        $edit = "UPDATE category SET name=".$proName.",description=".$prodesc.", status = ".$status." is_hot = ".$prosele." price = ".$price." stock_qty = ".$quan." cate_id = ".$cate." WHERE id = {$id}";
         mysqli_query($conn, $edit);
     if (isset($img)){
         $imgname = $id.".jpg";
@@ -26,7 +26,7 @@ if ($proName == "") {
         move_uploaded_file($temp, $path);
 
         $addimg =  "UPDATE product SET image_path ='$imgname' WHERE id = {$id}";
-        mysqli_query($conn, $addimg);
+        if(!mysqli_query($conn, $addimg)){echo "s0s";};
     }
         echo "<script>alert('Edit category successfully');location.href='product.php';</script>";
 

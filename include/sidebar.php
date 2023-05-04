@@ -25,6 +25,7 @@
             <div>
                 <h1 style="text-transform:capitalize; font-size: 22; color: gray" >
                     <img src="images/<?php
+
                     if ($_SERVER["PHP_SELF"] == "/assignment2/bowwow/profile.php" ||$_SERVER["PHP_SELF"] == "/assignment2/bowwow/user_information.php" ){}else{session_start();}
                     echo $_SESSION['admin_avatar']; ?>" alt="Admin Avatar" class="avatar" id="sidebar-avatar" style="width:50px; height: 50px; position: relative;">
                     <?php echo $_SESSION['username']; ?>
