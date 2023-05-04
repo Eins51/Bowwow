@@ -45,7 +45,7 @@
                         <i class="mdui-icon material-icons">apps</i>
                         <div class="mdui-list-item-content" >&nbsp Product Management</div>
                     </li>
-                    <li class="mdui-list-item mdui-ripple " onclick="window.location=`user_information.php`;" style="color: white;">
+                    <li class="mdui-list-item mdui-ripple " onclick="window.location=`user.php`;" style="color: white;">
                         <i class="mdui-icon material-icons">person</i>
                         <div class="mdui-list-item-content">&nbsp User Management</div>
                     </li>

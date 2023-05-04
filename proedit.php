@@ -65,7 +65,7 @@ $row = $result->fetch_assoc();
                     </div>               
                 <div class="mdui-col-xs-3">Is Hot:</div>
                     <div class="mdui-col-xs-9">
-                        <select class="mdui-select">
+                        <select class="mdui-select" form="submission" name="prosele">
                             <?php
                             if ($row["is_hot"] == 0){
                                 echo '  <option value="0" selected>no</option>';
@@ -82,7 +82,7 @@ $row = $result->fetch_assoc();
                     </div>
         <div class="mdui-col-xs-3">Status:</div>
         <div class="mdui-col-xs-9">
-            <select class="mdui-select" form="submission" name="stutes">
+            <select class="mdui-select" form="submission" name="status">
                 <?php
                 if ($row["status"] == 0){
                     echo '  <option value="0" selected>Shelved</option>';

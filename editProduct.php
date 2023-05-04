@@ -10,7 +10,7 @@ $cate = $_POST["catesele"];
 $quan = $_POST["quan"];
 $price = $_POST["price"];
 $status = $_POST["status"];
-$img = $_FILES["upload"];
+$img = $_FILES["up"];
 $temp = $img["tmp_name"];
 $id = $_GET["id"];
 if ($proName == "") {
@@ -18,8 +18,9 @@ if ($proName == "") {
 } else {
 
 
-        $edit = "UPDATE category SET name=".$proName.",description=".$prodesc.", status = ".$status." is_hot = ".$prosele." price = ".$price." stock_qty = ".$quan." cate_id = ".$cate." WHERE id = {$id}";
-        mysqli_query($conn, $edit);
+        $edit = "UPDATE product SET name='{$proName}',description='{$prodesc}', status = '{$status}', is_hot = '{$prosele}', price = '{$price}', stock_qty = '{$quan}', cate_id = '{$cate}' WHERE id = ".$id;
+        if(mysqli_query($conn, $edit)){echo "<script>alert('Edit successfully');location.href='product.php';</script>";}
+        else{echo $edit;}
     if (isset($img)){
         $imgname = $id.".jpg";
         $path = "./images/product_img/".$imgname;
@@ -28,7 +29,7 @@ if ($proName == "") {
         $addimg =  "UPDATE product SET image_path ='$imgname' WHERE id = {$id}";
         if(!mysqli_query($conn, $addimg)){echo "s0s";};
     }
-        echo "<script>alert('Edit category successfully');location.href='product.php';</script>";
+        //echo "<script>alert('Edit category successfully');location.href='product.php';</script>";
 
 }
 
