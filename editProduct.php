@@ -19,7 +19,7 @@ if ($proName == "") {
 
         $edit = "UPDATE category SET name='{$proName}',description='{$prodesc}', status = '{$status}' is_hot = '{$prosele}' price = '{$price}' stock_qty = '{$quan}' cate_id = '{$cate}' WHERE id = {$id}";
         mysqli_query($conn, $edit);
-        echo "<script>alert('Edit category successfully');location.href='category.php';</script>";
+        echo "<script>alert('Edit category successfully');location.href='product.php';</script>";
 
 }
 

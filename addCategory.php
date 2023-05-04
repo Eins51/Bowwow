@@ -1,47 +1,118 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入样式，mdui -->
+    <link rel="stylesheet" href="styles/bootstrap-337.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css"/>
+    <link rel="stylesheet" href="a5common/commonCSS.css">
+    <!-- 这个页面css-->
+    <style>
+                .content{
+            margin-left: 25px
 
-include ("conn.php");
-mysqli_select_db($conn,"bowwow");
+        }
 
-$cateName = $_POST["catename"];
-$catedesc = $_POST["catedesc"];
-$catesele = $_POST["catesele"];
-$img = $_FILES["up"];
-$temp = $img['tmp_name'];
-if (!isset($img)){
-    $err = $_FILES["up"]["error"];
-    echo "<script>alert('$err');location.href='".$_SERVER["HTTP_REFERER"]."';</script>";
-}
-//echo $catesele;
-if ($cateName == ""){
-    echo "<script>alert('Warning:Name cannot be empty!');location.href='".$_SERVER["HTTP_REFERER"]."';</script>";
-}
+    </style>
+    <!-- 引入jquery和boostrap，mdui -->
+    <script src="js/jquery-331.min.js"></script>
+    <script src="js/bootstrap-337.min.js"></script>
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <title>CAN302 Store Admin| Category</title>
+</head>
+<body class="mdui-drawer-body-left mdui-theme-primary-white mdui-theme-accent-blue">
+    <!-- 顶部框 -->
+        <div class="mdui-toolbar mdui-color-theme" style="color:burlywood;">
+            <a class="mdui-btn mdui-btn-icon">
+                <i class="mdui-icon material-icons">format_indent_decrease</i>
+            </a>
+            <div class="mdui-toolbar-spacer"></div> <!--会将该元素两边的内容推向两侧。-->
+            <a class="mdui-btn mdui-btn-icon" >
+                <i class="mdui-icon material-icons"onclick="window.location=`myprofile.php`;">account_circle</i>
+            </a>
+            <div class="mdui-chip" style="line-height:normal">
+                <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-burlywood-accent" style="position: right;" onclick="window.location=`login.php`;">Log out</button>
+            </div>
+        </div>
+    <!--侧边栏-->
+    <div class="mdui-drawer" id="siderbar" style="background-color: burlywood;">
+        <ul class="mdui-list">
+            <li class="mdui-list-item mdui-ripple lefthighlight" onclick="window.location=`myprofile.php`;">
+                <i class="mdui-icon material-icons">person</i>
+                <div class="mdui-list-item-content">&nbsp My Profile</div>
+            </li>
+        <li class="mdui-list-item mdui-ripple lefthighlight" onclick="window.location=`category.php`;">
+            <i class="mdui-icon material-icons">class</i>
+            <div class="mdui-list-item-content">&nbsp Category Management</div>
+        </li>
+        <li class="mdui-list-item mdui-ripple " onclick="window.location=`product.php`;">
+            <i class="mdui-icon material-icons">apps</i>
+            <div class="mdui-list-item-content">&nbsp Product Management</div>
+        </li>
+        <li class="mdui-list-item mdui-ripple " onclick="window.location=`user.php`;">
+            <i class="mdui-icon material-icons">person</i>
+            <div class="mdui-list-item-content">&nbsp User Management</div>
+        </li>
+        <li class="mdui-list-item mdui-ripple " onclick="window.location=`order.php`;">
+            <i class="mdui-icon material-icons">assignment</i>
+            <div class="mdui-list-item-content">&nbsp Order Management</div>
+        </li>
+        <li class="mdui-list-item mdui-ripple " onclick="window.location=`coupon.php`;">
+            <i class="mdui-icon material-icons">card_giftcard</i>
+            <div class="mdui-list-item-content">&nbsp Coupon Management</div>
+        </li>
+        </ul>
+    </div>
+    <div class="content">
+            <!-- 主内容 -->
+        <h1 style="text-transform:capitalize;">Category Management/Add Category
+            <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-blue-accent">Return</button>
+        </h1>
+        <h2 style="font-style: italic;">Please enter category information</h2>
 
-$checkExist = "SELECT * FROM category where name = '$cateName'";
-$rows = mysqli_query($conn, $checkExist);
-if (mysqli_num_rows($rows) == 0)
-{
-    $add = "INSERT INTO category (name, description, status) VALUES ('$cateName','$catedesc', '$catesele')";
-    if(mysqli_query($conn, $add)){
-        $rows = mysqli_query($conn, $checkExist);
-        $row = mysqli_fetch_assoc($rows);
-        $id = $row["id"];
-        $path = "category_img/".$id.".svg";
-        move_uploaded_file($temp, $path);
-        $imgname = $id.".svg";
-        $addimg =  "UPDATE category SET image_path ='$imgname' WHERE id = {$id}";
-        mysqli_query($conn, $addimg);
-        echo "<script>alert('Add category Successfully');location.href='category.php';</script>";
-    }
-    else{echo "<script>alert('Error happaned');location.href='".$_SERVER["HTTP_REFERER"]."';</script>";}
+        <form action="addCategory.php" method="post" id="submit"></form>
+                <div class="mdui-col-xs-3" style="font-weight: 400;">Category Name:</div>
 
-}else
-{
-    echo "<script>alert('Warning: category name is existing');location.href='".$_SERVER["HTTP_REFERER"]."';</script>";
-}
+                <div class="mdui-col-xs-9">
+                    <!-- required必填字段 -->
+                    <div class="mdui-textfield">
+                        <input class="mdui-textfield-input" type="text" placeholder="Food" name="catename" form="submit"/>
+                      </div>
+                        </div>
 
-//$userEmail = $_POST["email"];
-//$sql = "INSERT INTO test (id,email) VALUES ('$userName','$userEmail')";
-//mysqli_query($conn, $sql);
-//echo "<script>alert('success');location.href='".$_SERVER["HTTP_REFERER"]."';</script>";
-?>
+                <div class="mdui-col-xs-3">Category icon:</div>
+                <div class="mdui-col-xs-9">
+                <!-- 单选框 -->
+                    <i class="mdui-icon material-icons" style="font-size: 100px;" onclick="upload.click()">add_to_photos
+                        <input type="file" name="up" id="upload" style="display: none;" accept="image/svg+xml" form="submit"/></i>
+                <i>Only jpg/png with a maxium size of 500 kb</i>
+                </div>
+
+                <div class="mdui-col-xs-3">Category Description:</div>
+                <div class="mdui-col-xs-9">
+            
+                    <div class="mdui-textfield">
+                        <textarea class="textfield3" placeholder="Description" cols="30" rows="3" name="catedesc" form="submit"></textarea>
+                      </div>
+                        </div>
+                    <div class="mdui-col-xs-3">Category Status:</div>
+                    <div class="mdui-col-xs-9">
+                        <select class="mdui-select" name="catesele" form="submit">
+                            <option value="0" selected>Activated</option>
+                            <option value="1">Forbidden</option>
+
+                          </select>
+                    </div>
+                    <button class="mdui-btn mdui-color-blue-accent mdui-ripple" form="submit">Save</button>
+                    <button class="mdui-btn mdui-ripple" onclick="window.location.href = 'category.php'">Cancle</button>
+
+        </div>
+    </div>
+</body>
+<!-- 这个页面的JS-->
+<script>
+    
+</script>
+</html>
