@@ -34,7 +34,7 @@ include ("conn.php");
 <!-- 主内容 -->
 <div class="content" id="content">
     <h1 style="text-transform:capitalize;">Product Management/Add Product
-        <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-blue-accent" id="return">Return</button>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-blue-accent" id="return" onclick="<?php echo "location.href='".$_SERVER["HTTP_REFERER"]."'"?>">Return</button>
     </h1>
     <form action="addproduct.php" method="post" id="submit" enctype="multipart/form-data"></form>
     <h2 style="font-style: italic;">Please enter category information</h2>

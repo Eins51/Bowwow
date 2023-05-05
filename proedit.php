@@ -25,7 +25,7 @@ $row["description"] = str_replace('\'', '`', $row["description"]);
 
     <div class="content" id="content" style="mdui-drawer-body-left">
         <h1 style="text-transform:capitalize;">Product Management/Edit Product
-            <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-blue-accent" id="return">Return</button>
+            <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-blue-accent" id="return" onclick="<?php echo "location.href='".$_SERVER["HTTP_REFERER"]."'"?>">Return</button>
         </h1>
         <?php
         echo '<form action="editProduct.php?id='.$id.'" method="post" id="submission" enctype="multipart/form-data"></form>'

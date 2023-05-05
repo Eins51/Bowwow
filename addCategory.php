@@ -26,7 +26,7 @@
     <div class="content">
             <!-- 主内容 -->
         <h1 style="text-transform:capitalize;">Category Management/Add Category
-            <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-blue-accent">Return</button>
+            <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-blue-accent" onclick="<?php echo "location.href='".$_SERVER["HTTP_REFERER"]."'"?>">Return</button>
         </h1>
         <h2 style="font-style: italic;">Please enter category information</h2>
 
