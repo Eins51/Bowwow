@@ -11,7 +11,7 @@
  Target Server Version : 100422 (10.4.22-MariaDB)
  File Encoding         : 65001
 
- Date: 03/05/2023 23:06:13
+ Date: 05/05/2023 13:55:40
 */
 
 SET NAMES utf8mb4;
@@ -98,22 +98,20 @@ CREATE TABLE `category`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `status` tinyint(4) NOT NULL COMMENT '0: activated, 1: forbidden',
-  `rank` int(11) NOT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `image_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'for category icon',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `rank`(`rank`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
-INSERT INTO `category` VALUES (1, 'Food', 0, 1, 'All kinds of pet food', 'food.svg');
-INSERT INTO `category` VALUES (2, 'Health', 0, 2, 'Pet health care products', 'health.svg');
-INSERT INTO `category` VALUES (3, 'Grooming', 0, 3, 'Pet grooming supplies', 'grooming.svg');
-INSERT INTO `category` VALUES (4, 'Toys', 0, 4, 'Various kinds of pet toys', 'toys.svg');
-INSERT INTO `category` VALUES (5, 'Carriers', 1, 5, 'Pet carriers for travelling', 'carriers.svg');
-INSERT INTO `category` VALUES (6, 'Furniture', 0, 6, 'Pet beds, houses and furniture', 'furniture.svg');
+INSERT INTO `category` VALUES (1, 'Food', 0, 'All kinds of pet food', 'food.svg');
+INSERT INTO `category` VALUES (2, 'Health', 0, 'Pet health care products', 'health.svg');
+INSERT INTO `category` VALUES (3, 'Grooming', 0, 'Pet grooming supplies', 'grooming.svg');
+INSERT INTO `category` VALUES (4, 'Toys', 0, 'Various kinds of pet toys', 'toys.svg');
+INSERT INTO `category` VALUES (5, 'Carriers', 1, 'Pet carriers for travelling', 'carriers.svg');
+INSERT INTO `category` VALUES (6, 'Furniture', 0, 'Pet beds, houses and furniture', 'furniture.svg');
 
 -- ----------------------------
 -- Table structure for coupon
