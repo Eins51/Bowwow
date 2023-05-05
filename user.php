@@ -87,8 +87,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Embedded style sheet -->
     <style>
         table.center{
-            margin:auto;
-                width:90%;
+            margin:10% 10% -10% -20%;
+                width:115%;
                 border-collapse:collapse;
                 text-align: center;
 
@@ -113,12 +113,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         h2{
-            margin-left: 5%;
+            margin-left: -20%;
         }
         
         div.search_clearfix{
             float:right;
-            margin-right:calc(5% - 10px);
+            margin-right:calc(5%);
+            margin-bottom:calc(2%);
         }
     </style>
 </head>
@@ -136,7 +137,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- SEARCHING -->
 
 <div class="margin" id="page_style">
+    <div class="operation clearfix">
 
+  <span class="submenu">
+  <div class="search_clearfix">
+   <label class="label_name">Order Searching：</label><input name="" type="text"  class="form-control col-xs-6"/><button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-amber-100" onclick=""  type="button" ><i class="fa  fa-search"></i>&nbsp;Search</button>
+
+  </div>
+    </div>
 
     <!--列表展示-->
     <h3>

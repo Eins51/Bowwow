@@ -88,13 +88,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <style>
         
         table.center{
-            margin:auto;
-                width:90%;
-                border-collapse:collapse;
-                text-align: center;
+            margin:auto auto auto -20%;
+            width:115%;
+            border-collapse:collapse;
+            text-align: center;
 
             }
-    
+
         table.center th, table.center td {
             padding: 8px;
             border-bottom: 1px solid #ddd;
@@ -104,12 +104,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         h2{
-            margin-left: 5%;
+            margin-left: -20%;
         }
-        
+
         div.search_clearfix{
             float:right;
-            margin-right:calc(5% - 10px);
+            margin-right:calc(5%);
         }
     </style>
 </head>
@@ -129,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div class="margin" id="page_style">
     <div class="operation clearfix">
     
-    <span class="submenu"><a href="addcategory.php" style ="margin-left:5%;"class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-amber-100" title="Add Category"><i class="fa  fa-edit"></i>&nbsp;Add Category</a></span>
+    <span class="submenu"><a href="addcategory.php" style ="margin-left:-20%;"class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-amber-100" title="Add Category"><i class="fa  fa-edit"></i>&nbsp;Add Category</a></span>
     <div class="search_clearfix">
      <label for="search">Category Searching：</label><input name="search" type="text" id="search" class="form-control col-xs-6"/><button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-amber-100" onclick="search"  type="button" ><i class="fa  fa-search"></i>&nbsp;Search</button>
      

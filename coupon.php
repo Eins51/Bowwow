@@ -87,8 +87,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Embedded style sheet -->
     <style>
         table.center{
-            margin:auto;
-                width:90%;
+            margin:auto auto auto -20%;
+                width:115%;
                 border-collapse:collapse;
                 text-align: center;
 
@@ -98,10 +98,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             padding: 8px;
             border-bottom: 1px solid #ddd;
         }
+        h2{
+            margin-left: -20%;
+        }
         table.center th{
             background-color: #D8CCC4;
         }
-
+        div.search_clearfix{
+            float:right;
+            margin-right:calc(5%);
+        }
         
     </style>
 </head>
@@ -113,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="mdui-drawer-body-left" id="body" >
 
   <!--主题-->
-  <h1 >Coupon Mangement</h1>
+  <h2>Coupon Mangement</h2>
   <!-- 显示已有类别 -->
   <h2></h2>
 
@@ -122,8 +128,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div class="margin" id="page_style">
     <div class="operation clearfix">
     
-    <span class="submenu"><a href="addCoupon.php" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-amber-100" title="Add coupon"><i class="fa  fa-edit"></i>&nbsp;Add Coupon</a></span>
-    <div class="search  clearfix">
+    <span class="submenu"><a href="addCoupon.php" style="margin-left: -20%" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-amber-100" title="Add coupon"><i class="fa  fa-edit"></i>&nbsp;Add Coupon</a></span>
+    <div class="search_clearfix">
      <label class="label_name">Coupon Searching：</label><input name="" type="text"  class="form-control col-xs-6"/><button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-amber-100" onclick=""  type="button"><i class="fa  fa-search"></i>&nbsp;Search</button>
      
     </div>

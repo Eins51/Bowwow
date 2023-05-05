@@ -87,10 +87,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Embedded style sheet -->
     <style>
         table.center{
-            margin:auto;
-                width:90%;
-                border-collapse:collapse;
-                text-align: center;
+            margin:auto auto auto  -20%;
+            width:115%;
+            border-collapse:collapse;
+            text-align: center;
 
             }
     
@@ -104,12 +104,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         
         h2{
-            margin-left: 5%;
+            margin-left: -20%;
         }
         
         div.search_clearfix{
             float:right;
-            margin-right:calc(5% - 10px);
+            margin-right:calc(5%);
+            margin-bottom:calc(2%);
         }
         
     </style>

@@ -5,7 +5,7 @@ mysqli_select_db($conn,"bowwow");
 $cateName = $_POST["catename"];
 $catedesc = $_POST["catedesc"];
 $catesele = $_POST["catesele"];
-$img = $_FILES["upload"];
+$img = $_FILES["up"];
 $temp = $img["tmp_name"];
 $id = $_GET["id"];
 if ($cateName == ""){
@@ -20,7 +20,7 @@ if ($cateName == ""){
     }else{
         $edit = "UPDATE category SET name='{$cateName}',description='{$catedesc}', status = '{$catesele}' WHERE id = {$id}";
         mysqli_query($conn, $edit);
-        if (isset($img)){
+        if (isset($img) && $img !== ""){
 
             $path = "./images/category_img/".$id.".svg";
             move_uploaded_file($temp, $path);
