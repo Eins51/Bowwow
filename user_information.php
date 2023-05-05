@@ -798,6 +798,7 @@ if (isset($_POST['deletecu'])) {
                                                                             $sql4 = "select name from `coupon` where id=$cid";
                                                                             $row5 = mysqli_fetch_array(mysqli_query($con, $sql4));
                                                                             echo '<div class="task-type"><b>Coupon:</b></div>';
+                                                                            echo $row5['name'];
                                                                         }
                                                                         $aid = $row3["address_id"];
                                                                         $sql5 = "select * from `address` where id=$aid";
