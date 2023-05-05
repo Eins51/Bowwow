@@ -18,11 +18,11 @@ $row = $result->fetch_assoc();
     <title>CAN302 Store Admin| Category Edition</title>
 </head>
 
-
+<body>
 <!--侧边栏-->
 <?php include ("include/sidebar.php");?>
 
-    <div class="content">
+    <div class="content" style="mdui-drawer-body-left">
             <!-- 主内容 -->
         <h1 style="text-transform:capitalize;">Category Management/Edit Category
             <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-blue-accent">Return</button>

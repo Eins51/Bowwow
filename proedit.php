@@ -19,11 +19,11 @@ $row["description"] = str_replace('\'', '`', $row["description"]);
     <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
     <title>CAN302 Store Admin| Product</title>
 </head>
-
+<body>
 <?php include 'include/sidebar.php'; ?>
     <!-- 顶部框 -->
 
-    <div class="content" id="content">
+    <div class="content" id="content" style="mdui-drawer-body-left">
         <h1 style="text-transform:capitalize;">Product Management/Edit Product
             <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-blue-accent" id="return">Return</button>
         </h1>

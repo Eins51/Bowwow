@@ -10,8 +10,9 @@
     <!-- 这个页面css-->
     <title>Store Admin| Coupon</title>
 </head>
+<body>
 <?php include("include/sidebar.php");?>
-    <div class="content">
+    <div class="content" style="mdui-drawer-body-left">
             <!-- 主内容 -->
         <h1 style="text-transform:capitalize;">Coupon Management/Add Coupon
             <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-blue-accent">Return</button>
@@ -55,15 +56,17 @@
                       </div>
                         </div>
                         <div class="purchasenumber" >
-                            <h3 class="mdui-col-xs-3">Quantity</h3>
+                            <div class="mdui-col-xs-3">Quantity</div>
                              <div class="number" >
-                                  <i class = "minus iconfont icon-jianhao" class="mdui-col-xs-3" style="margin: 10px 10px 10px 10px;"></i>
+                                  <i class = "minus iconfont icon-jianhao" class="mdui-col-xs-3" style="margin: 10px 10px 10px 0px;"></i>
                                   <input type="text" name="cousele" form="submit">
                                   <i class = "plus iconfont icon-jiahao1"></i>
                              </div>
                        </div>
                 </form>
+    </div>
                        <div>
+
                         <button class="mdui-btn mdui-color-blue-accent mdui-ripple" form="submit" style="margin: 10px 10px 10px 10px;" id="myButton" onclick="saveText()" form="submit">Save</button>
                     <button class="mdui-btn mdui-ripple" id="cancelButton" onclick="cancel()">Cancle</button>  
                 </div>
